@@ -1,6 +1,6 @@
 {
   "release": "v1.0.0-r004",
-  "observed_at_kst": "2026-10-26T00:34:00+09:00",
+  "observed_at_kst": "2026-10-26T00:36:13+09:00",
   "scope": "Post-publication VirusTotal report lookup for the three changed r004 installer files; not an analysis of the full ZIP or reconstructed game.",
   "observation_method": "Read-only detection pages and visible vendor status icons; no upload or reanalysis initiated by Codex during this check.",
   "supersedes": "The NOT_SCANNED status in the earlier publication-time security record for these three exact hashes only.",
@@ -9,16 +9,16 @@
       "name": "engine.py",
       "sha256": "7a1e56ebdd0f546f2ff6fef37a9bd397b4d61596145689dd69440b13a899ecb5",
       "size": 23819,
-      "last_analysis_kst": "2026-10-26T00:29:19+09:00",
-      "displayed_result": "0/40",
+      "last_analysis_kst": "2026-10-26T00:34:16+09:00",
+      "displayed_result": "0/61",
       "stats": {
-        "undetected": 40,
+        "undetected": 61,
         "malicious": 0,
         "suspicious": 0,
-        "confirmed_timeout": 2,
-        "timeout": 20,
-        "type_unsupported": 11,
-        "failure": 2
+        "confirmed_timeout": 1,
+        "timeout": 0,
+        "type_unsupported": 13,
+        "failure": 0
       },
       "report_url": "https://www.virustotal.com/gui/file/7a1e56ebdd0f546f2ff6fef37a9bd397b4d61596145689dd69440b13a899ecb5",
       "release_file_sha256_matches": true
@@ -74,7 +74,7 @@
   ],
   "limits": [
     "Undetected, timeout, confirmed timeout, unsupported file type and failed analysis are separate statuses.",
-    "engine.py has 22 total timeout/confirmed-timeout statuses and 2 failed analyses; this is not a complete result from every vendor.",
+    "Each of the three reports shows 61 undetected, 1 confirmed timeout and 13 unsupported file-type statuses; unsupported or timed-out vendors did not return a clean result.",
     "Values reflect the observation time and can change.",
     "No detection is not a guarantee of safety or proof of absence of data exfiltration."
   ]

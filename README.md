@@ -108,11 +108,11 @@ r004는 로컬 플랫폼의 기본 **한국어** 선택으로 게임 리소스�
 
 | 파일·보고서 | 악성 탐지 / 표시된 엔진 수 | 마지막 검사 시각(KST) |
 | --- | --- | --- |
-| [`engine.py`](https://www.virustotal.com/gui/file/7a1e56ebdd0f546f2ff6fef37a9bd397b4d61596145689dd69440b13a899ecb5) | **0/40** | 2026-10-26 00:29:19 |
+| [`engine.py`](https://www.virustotal.com/gui/file/7a1e56ebdd0f546f2ff6fef37a9bd397b4d61596145689dd69440b13a899ecb5) | **0/61** | 2026-10-26 00:34:16 |
 | [`native_label_support.py`](https://www.virustotal.com/gui/file/964e63a04a1ab4591f414c53359a388c60e78751003afaf89a87b6a08edfd015) | **0/61** | 2026-10-26 00:29:43 |
 | [`platform_launch.py`](https://www.virustotal.com/gui/file/037aadb57c00fbe1488cf21f13c8c740dfb269b91b480efe23bed9bf43fdbe7e) | **0/61** | 2026-10-26 00:31:24 |
 
-`engine.py`는 미탐지 40개 외에 시간 초과 22개(Confirmed timeout 포함), 파일 형식 미지원 11개, 검사 실패 2개가 표시됐습니다. 나머지 두 파일은 각각 미탐지 61개, 시간 초과 1개, 형식 미지원 13개입니다. **시간 초과·미지원·실패를 미탐지로 계산하지 않습니다.** 이 표는 해당 세 파일의 확인 시점 결과이며 ZIP 전체의 VirusTotal 검사나 안전성 보증을 뜻하지 않습니다.
+최신 보고서에서 세 파일 모두 각각 미탐지 61개, 시간 초과 1개(Confirmed timeout), 파일 형식 미지원 13개가 표시됐습니다. **시간 초과·미지원을 미탐지로 계산하지 않습니다.** 이 표는 해당 세 파일의 확인 시점 결과이며 ZIP 전체의 VirusTotal 검사나 안전성 보증을 뜻하지 않습니다.
 
 ### 이전 실행 방식 수정본(r003)의 검사 기록
 
