@@ -46,13 +46,63 @@
     }
   ],
   "native_dll_sha256": "44f17bb95f75cc0f9ed0b35de52f0e84d567dd80ba6dabb714769dc0db57b04e",
-  "virustotal_scan_performed": false,
-  "file_upload_performed": false,
+  "virustotal_reports_verified": true,
+  "virustotal_whole_distribution_scan_performed": false,
+  "file_upload_performed_by_assistant": false,
+  "virustotal": {
+    "verified_date_kst": "2026-10-25",
+    "evidence": "User-provided screenshots and live VirusTotal report pages; all four SHA-256 values matched local candidate files or the previously verified native payload binding.",
+    "reports": [
+      {
+        "file": "fgoko-labels.dll",
+        "bytes": 147456,
+        "sha256": "44f17bb95f75cc0f9ed0b35de52f0e84d567dd80ba6dabb714769dc0db57b04e",
+        "url": "https://www.virustotal.com/gui/file/44f17bb95f75cc0f9ed0b35de52f0e84d567dd80ba6dabb714769dc0db57b04e",
+        "detection_ratio_displayed": "0/70",
+        "last_analysis_kst": "2026-10-25T22:24:27+09:00",
+        "verification_mode": "Report checked after user submission",
+        "confirmed_timeout_vendors": ["CTX"],
+        "type_unsupported_count": 4,
+        "note": "User screenshot showed 0/69; subsequent live report showed 0/70. No malicious detection was displayed in either observation."
+      },
+      {
+        "file": "engine/runtime/python.exe",
+        "bytes": 103192,
+        "sha256": "3cce33d75d6fdae4e004d0bdf149320b3147482a9caf370079dcb9c191a1b260",
+        "url": "https://www.virustotal.com/gui/file/3cce33d75d6fdae4e004d0bdf149320b3147482a9caf370079dcb9c191a1b260",
+        "detection_ratio_displayed": "0/71",
+        "last_analysis_kst": "2026-10-10T04:26:36+09:00",
+        "verification_mode": "Existing report lookup for identical SHA-256; no new scan claimed"
+      },
+      {
+        "file": "engine/runtime/python310.dll",
+        "bytes": 4458776,
+        "sha256": "14b06796f288bc6599e458fb23a944ab0c843e9868058f02a91d4606533505ed",
+        "url": "https://www.virustotal.com/gui/file/14b06796f288bc6599e458fb23a944ab0c843e9868058f02a91d4606533505ed",
+        "detection_ratio_displayed": "0/71",
+        "last_analysis_kst": "2026-10-19T19:11:20+09:00",
+        "verification_mode": "Existing report lookup for identical SHA-256; no new scan claimed"
+      },
+      {
+        "file": "engine/engine.py",
+        "bytes": 20803,
+        "sha256": "ddffa3b7474e6e70cc27f2e88b002882b7c91b69d3697222cbf0951e7ac00b97",
+        "url": "https://www.virustotal.com/gui/file/ddffa3b7474e6e70cc27f2e88b002882b7c91b69d3697222cbf0951e7ac00b97",
+        "detection_ratio_displayed": "0/61",
+        "last_analysis_kst": "2026-10-25T22:25:06+09:00",
+        "verification_mode": "Report checked after user submission",
+        "confirmed_timeout_vendors": ["CTX"],
+        "type_unsupported_count": 13
+      }
+    ]
+  },
   "limitations": [
     "Console output does not report actual per-file coverage or scan counts.",
     "Folder scan includes packaged delta archives, not a reconstructed and running game.",
     "No live network capture or game execution was performed.",
-    "A no-threat result is not a guarantee of safety; changes require a new scan."
+    "A no-threat result is not a guarantee of safety or absence of personal-data leakage; changed files require a new scan.",
+    "VirusTotal results cover four individual files, not the full distribution archives.",
+    "Some VirusTotal engines timed out or could not process the file type; displayed ratios can change after observation."
   ],
-  "source": "Local MpCmdRun console results and previously verified candidate/archive hashes; no personal absolute paths included."
+  "source": "Local MpCmdRun console results, verified candidate/archive hashes, user-provided screenshots and live VirusTotal report pages; no personal absolute paths included."
 }

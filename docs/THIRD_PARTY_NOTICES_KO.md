@@ -1,6 +1,6 @@
-# 크레딧·제3자 고지 초안
+# 크레딧·제3자 고지
 
-> 2026-10-25 검토본. 최종 배포 구성과 대조해 완성해야 한다. 이 요약은 각 라이선스의 전문을 대신하지 않는다. 언급된 제작자는 이 패치를 승인하거나 보증한 것으로 표시하지 않는다.
+> 2026-10-25 오프라인 r002 구성과 대조한 고지. 이 요약은 각 라이선스의 전문을 대신하지 않는다. 언급된 제작자는 이 패치를 승인하거나 보증한 것으로 표시하지 않는다.
 
 ## 공통 고지 문안
 
@@ -36,17 +36,17 @@ SIL OFL 1.1 전문을 동봉하고 파생 글꼴 명칭을 유지합니다. 글�
 
 **Python Software Foundation 및 기여자** — Python 3.10.11 기반 실행 환경. 실제 포함한 Python 배포본의 `LICENSE.txt` 전체를 유지해야 합니다. 그 파일의 PSF·역사적 라이선스와 포함 구성요소의 개별 고지를 적용합니다. [v3.10.11 라이선스](https://github.com/python/cpython/blob/v3.10.11/LICENSE)
 
-Python 구성 변경 요약 초안: 기존 실행 파일·DLL을 복사하고, 표준 라이브러리 중 개발·시험용 일부 디렉터리를 제외하여 `python310.zip`으로 묶었습니다. 경로 설정 파일과 패치 실행 스크립트를 추가했습니다. Python 소스 자체 수정 여부와 최종 포함 목록은 마지막 빌드에서 재확인합니다.
+Python 구성 변경 요약: 기존 실행 파일·DLL을 복사하고, 표준 라이브러리 중 개발·시험용 일부 디렉터리를 제외하여 `python310.zip`으로 묶었습니다. 경로 설정 파일과 패치 실행 스크립트를 추가했습니다. Python 실행 파일·DLL과 포함된 표준 라이브러리 소스는 원본을 유지했습니다. [구성품별 고지](RUNTIME_COMPONENTS_KO.md)와 [런타임 파일 해시](RUNTIME_FILES.json)를 함께 제공합니다.
 
 **Tcl/Tk 및 기여자** — Tkinter 설치 화면에 사용하는 런타임. 실제 제공 버전의 저작권 고지와 `license.terms` 전문 및 하위 구성요소 고지를 유지합니다. [공식 라이선스](https://www.tcl-lang.org/software/tcltk/license.html)
 
-**Zig contributors / MinGW-w64 contributors** — 한국어 표시 보조 DLL의 빌드·런타임 구성. 개발 패키지의 `Zig-MIT.txt`, `MinGW-w64-COPYING.txt`, `NATIVE_LABEL_NOTICE.txt`를 최종 DLL과 함께 전달하는지 확인해야 합니다. 실제 링크 부분에 별도 라이선스가 있으면 그 조건도 적용합니다.
+**Zig contributors / MinGW-w64 contributors** — 한국어 표시 보조 DLL의 빌드·런타임 구성. r002의 `engine/licenses`에 `Zig-MIT.txt`, `MinGW-w64-COPYING.txt`, `NATIVE_LABEL_NOTICE.txt`를 동봉했습니다. 설치 시 관리 도구에도 함께 복사됩니다. 소스 미동봉 구성에 맞춰 네이티브 DLL 안내 문구를 바로잡았습니다. 실제 링크 부분에 별도 라이선스가 있으면 그 조건도 적용합니다.
 
-**Python에 포함된 추가 라이브러리와 Microsoft 런타임** — 실제 포함한 OpenSSL·libffi·SQLite·bzip2·zlib·VC 런타임 등의 버전과 라이선스를 대조해야 합니다. 모두 PSF나 MIT라고 표시하지 않습니다. 현재 Python LICENSE에는 여러 구성품 고지가 있으나 최종 DLL별 고지 및 Microsoft 재배포 조건 확인은 남아 있습니다.
+**Python에 포함된 추가 라이브러리와 Microsoft 런타임** — OpenSSL 1.1.1t, Tcl/Tk 8.6.12, SQLite 3.40.1 및 Python에 포함된 추가 라이브러리와 VC 런타임의 적용 고지를 [구성품 표](RUNTIME_COMPONENTS_KO.md)에 구분했습니다. Python 배포본 LICENSE의 Windows 추가 조건, Python 문서의 통합 구성품 고지, Tcl/Tk·XZ 고지를 함께 동봉하며 모든 구성품을 PSF나 MIT라고 표시하지 않습니다.
 
 ## 라이선스 전문 보관
 
-이 저장소의 [licenses](../licenses/)에는 확인한 제3자 고지 전문을 검토용으로 보관합니다. 저장소에 고지를 추가하는 것과 최종 설치 ZIP에 고지를 동봉하는 것은 별개입니다. 기존 r001 ZIP의 Zig·MinGW 고지 누락은 새 패키지에서 보완해야 합니다.
+이 저장소의 [licenses](../licenses/)에는 확인한 제3자 고지 전문을 검토용으로 보관합니다. 저장소에 고지를 추가하는 것과 최종 설치 ZIP에 고지를 동봉하는 것은 별개입니다. r001 ZIP에서 누락됐던 Zig·MinGW·네이티브 DLL 고지는 r002에 보완했습니다.
 
 - [Noto 파생 글꼴 OFL](../licenses/NOTO-OFL.txt)
 - [FGOAC scooby MIT](../licenses/FGOAC-scooby-MIT.txt)

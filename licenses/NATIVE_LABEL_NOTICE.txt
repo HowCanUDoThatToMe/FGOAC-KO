@@ -1,0 +1,7 @@
+fgoko-labels.dll is a project-owned Korean label bridge built with Zig 0.13.0,
+x86_64-windows-gnu. This offline distribution includes the compiled DLL, not
+the native project source or build workspace.
+Zig compiler runtime and MinGW-w64 startup code notices accompany this package
+in Zig-MIT.txt and MinGW-w64-COPYING.txt.
+Windows system DLLs are dynamically linked and are not distributed.
+These notices do not grant rights to the original game's code or artwork.

@@ -1,0 +1,137 @@
+{
+  "candidate": "offline r002",
+  "verified_date_kst": "2026-10-25",
+  "archives": [
+    {
+      "name": "FGOAC-Korean-Offline-v1.0.0-1of2.zip",
+      "sha256": "9175fd12b295d34275d7bf260b0407b4bbf836186593af5b675814809f9cee27",
+      "size": 1958416092
+    },
+    {
+      "name": "FGOAC-Korean-Offline-v1.0.0-2of2.zip",
+      "sha256": "4e356ace868ba81f445364bb5caad518dd4426e954122a9a979f35335988df18",
+      "size": 2143696274
+    }
+  ],
+  "defender": {
+    "scanner": "Microsoft Defender Antivirus",
+    "target": "offline candidate-r002 folder",
+    "start_utc": "2026-10-25T13:42:52.5597502+00:00",
+    "end_utc": "2026-10-25T13:43:14.0936892+00:00",
+    "duration_seconds": 21.5204083,
+    "exit_code": 0,
+    "disable_remediation": true,
+    "output": "Scan starting...\r\nScan finished.\r\nScanning <candidate-r002> found no threats.\r\n"
+  },
+  "static_privacy_check": {
+    "files_scanned_count": 1752,
+    "pattern_hits_needing_review": [],
+    "private_named_outer_files": [],
+    "outer_candidate_mismatches": [],
+    "outer_duplicates": 0,
+    "payload_output_count": 4367,
+    "reconstructed_text_files_checked": 1172,
+    "reconstructed_text_personal_path_matches": []
+  },
+  "exact_archive_file_count": 1091,
+  "historical_virustotal_record": "SECURITY_CHECK_R001_20261025.json",
+  "unchanged_virustotal_files": [
+    "fgoko-labels.dll",
+    "python.exe",
+    "python310.dll"
+  ],
+  "changed_engine_sha256": "1f9ab7169a3e2890d34ca766146de5583c5b1e3416c755dd8d66891bc8a21dca",
+  "changed_engine_virustotal_scan": true,
+  "real_offline_installation_test": {
+    "configuration_restored_exactly": true,
+    "exact_overlay_files": 4364,
+    "exact_server_files": 3,
+    "game_launched": false,
+    "manager_and_notices_copied_exactly": true,
+    "notices_preserved_after_uninstall": true,
+    "status": "PASSED",
+    "steps": [
+      {
+        "exit_code": 0,
+        "log_sha256": "2147b3f8136c3d6c3a5d2b3281be58287c3d7bf36767cbd06f82ac5b3ffe21bd",
+        "name": "01-gui-self-test",
+        "seconds": 0.97
+      },
+      {
+        "exit_code": 0,
+        "log_sha256": "c53208456003f482ead446a37c2ff07d8d6ddaf46d0ff05946d6201aa9360b05",
+        "name": "02-previous-test-install-status",
+        "seconds": 100.88
+      },
+      {
+        "exit_code": 0,
+        "log_sha256": "80a005f5f03c22418da232ae3cdfcd79ab56c68c0a2a91f2c1c63df615da5776",
+        "name": "03-remove-previous-test-install",
+        "seconds": 46.0
+      },
+      {
+        "exit_code": 0,
+        "log_sha256": "58e773316558e5c71aac636374b29b3f5802843be28a07f047b98bed2d2b46bb",
+        "name": "04-fresh-offline-install",
+        "seconds": 414.44
+      },
+      {
+        "exit_code": 0,
+        "log_sha256": "df14991b1b519bd7bbaafc89c61ae8710ec9f50b155f4c6f98728a72565a885f",
+        "name": "05-repeat-same-release",
+        "seconds": 143.75
+      },
+      {
+        "exit_code": 0,
+        "log_sha256": "83f1f640864a163cf028bb61cc45480f7c4d758f6a9536bbbb1bcf1821bebb49",
+        "name": "06-installed-manager-recovery",
+        "seconds": 44.48
+      },
+      {
+        "exit_code": 0,
+        "log_sha256": "c53208456003f482ead446a37c2ff07d8d6ddaf46d0ff05946d6201aa9360b05",
+        "name": "07-installed-manager-status",
+        "seconds": 39.56
+      },
+      {
+        "exit_code": 0,
+        "log_sha256": "80a005f5f03c22418da232ae3cdfcd79ab56c68c0a2a91f2c1c63df615da5776",
+        "name": "08-installed-manager-remove",
+        "seconds": 42.67
+      }
+    ],
+    "target": "existing isolated physical test copy"
+  },
+  "game_launched": false,
+  "limitations": [
+    "No detection does not prove safety or absence of data leakage.",
+    "No live game screen verification or network capture was performed.",
+    "VirusTotal results cover only identical file hashes, not the whole ZIP."
+  ],
+  "virustotal_new_reports": [
+    {
+      "file": "engine.py",
+      "sha256": "1f9ab7169a3e2890d34ca766146de5583c5b1e3416c755dd8d66891bc8a21dca",
+      "ratio": "0/61",
+      "last_analysis_kst": "2026-10-25T22:53:49+09:00",
+      "url": "https://www.virustotal.com/gui/file/1f9ab7169a3e2890d34ca766146de5583c5b1e3416c755dd8d66891bc8a21dca",
+      "verification": "User submitted; live report verified against local file SHA-256",
+      "timeout_count": 1,
+      "unsupported_count": 13
+    },
+    {
+      "file": "offline_ui.py",
+      "sha256": "8c1e1daf200da58ca98a9b46fc18016853ea244e4490e4773aeb152294b30c49",
+      "ratio": "0/61",
+      "last_analysis_kst": "2026-10-25T22:52:36+09:00",
+      "url": "https://www.virustotal.com/gui/file/8c1e1daf200da58ca98a9b46fc18016853ea244e4490e4773aeb152294b30c49",
+      "verification": "User submitted; live report verified against local file SHA-256",
+      "timeout_count": 1,
+      "unsupported_count": 13
+    }
+  ],
+  "synthetic_tests": {
+    "passed": 13,
+    "scope": "offline integrity, privacy-preserving protection, notice preservation, recovery and user-change preservation"
+  }
+}
