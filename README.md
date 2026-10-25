@@ -70,7 +70,7 @@ Fate/Grand Order Arcade의 텍스트와 화면 속 글자를 한국어로 옮기
 
 ## 받기와 설치
 
-> **최종 설치·실행 테스트 후 다운로드 공개 예정입니다.** 아래는 배포 후 사용할 설치·실행 방법입니다. 공개가 완료되면 [릴리스 페이지](https://github.com/HowCanUDoThatToMe/FGOAC-KO/releases)에서 ZIP 두 개를 모두 받을 수 있습니다. 두 ZIP은 각각 열리는 일반 압축파일이며, 합계 4,102,112,366바이트(약 4.10GB)입니다. [SHA-256 목록](docs/SHA256SUMS_v1.0.0.txt)으로 파일 일치를 확인할 수 있습니다.
+> **최종 설치·실행 테스트 후 다운로드 공개 예정입니다.** 아래는 배포 후 사용할 설치·실행 방법입니다. 공개가 완료되면 [릴리스 페이지](https://github.com/HowCanUDoThatToMe/FGOAC-KO/releases)에서 ZIP 두 개를 모두 받을 수 있습니다. 두 ZIP은 각각 열리는 일반 압축파일이며, 최종 묶음은 약 4.10GB입니다. [SHA-256 목록](docs/SHA256SUMS_v1.0.0.txt)은 현재 교체 전 r002 기록이며, 최종 배포 파일 공개 시 함께 갱신합니다.
 
 1. 배포 페이지의 Assets에서 `FGOAC-Korean-Offline-v1.0.0-1of2.zip`과 `FGOAC-Korean-Offline-v1.0.0-2of2.zip`을 **둘 다** 받습니다. `Source code` 압축 파일은 사용자 설치용 묶음이 아닙니다.
 2. 두 ZIP을 같은 위치에 압축 해제합니다. 하나의 `FGOAC-Korean-Offline-v1.0.0` 폴더 안에 `engine`, `payload`, `Start-KoreanPatch.cmd`가 함께 있어야 합니다. 이전 버전 폴더에 섞어 풀지 마세요.
