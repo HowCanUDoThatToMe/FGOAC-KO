@@ -1,0 +1,92 @@
+{
+  "release": "v1.0.1",
+  "date_kst": "2026-10-26",
+  "automated_tests": {
+    "tests": 33,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "passed": true
+  },
+  "server_compatibility": {
+    "provided_file_sha256": "31ed82e1470fec4e2493ed341878e2888307088583adca8e1f9af9702e6add2a",
+    "provided_file_accepted": true,
+    "bootstrap_binding_matches": true,
+    "unrelated_server_changes_allowed": true,
+    "original_server_overwritten": false,
+    "provided_server_code_executed": false
+  },
+  "defender": {
+    "start": "2026-10-26T02:06:01.1620974+09:00",
+    "end": "2026-10-26T02:06:12.0362055+09:00",
+    "duration_seconds": 10.8741081,
+    "exit_code": 0,
+    "result": "NO_THREATS_FOUND",
+    "scan_type": "Custom scan of the complete candidate folder; not a whole-PC or boot-time offline scan",
+    "remediation_disabled": true
+  },
+  "privacy": {
+    "scope": "Static pattern scan; not live traffic analysis",
+    "files_scanned": 1755,
+    "pattern_hits": [],
+    "private_named_files": []
+  },
+  "archives": [
+    {
+      "name": "FGOAC-Korean-Offline-v1.0.1-1of2.zip",
+      "bytes": 1958442528,
+      "sha256": "10757e11c0af99da30617150e63cb6be901b192fb72313a913bc38b2509b4a1c"
+    },
+    {
+      "name": "FGOAC-Korean-Offline-v1.0.1-2of2.zip",
+      "bytes": 2143696274,
+      "sha256": "8027cc6e54b879c1e4ec86db8ec25e1d25fb27ad2786ecd0a27ddd18a598fb46"
+    }
+  ],
+  "archive_verification": {
+    "files": 1094,
+    "mismatches": 0,
+    "missing": 0,
+    "duplicates": 0
+  },
+  "small_update": {
+    "source": "v1.0.0-r004",
+    "target": "v1.0.1",
+    "file": "FGOAC-Korean-v1.0.0-r004-to-v1.0.1-update.zip",
+    "size": 120904,
+    "sha256": "7500837f8751a0270371b8e8ac30ede112765033049d6aa9997fe3b1605afe94",
+    "changed_files": [
+      "engine/engine.py",
+      "engine/platform_launch.py",
+      "INSTALL_KO.txt",
+      "offline-manifest.json",
+      "RELEASE_NOTES_KO.md",
+      "SHA256SUMS.txt"
+    ],
+    "merged_inventory_equals_full_release": true
+  },
+  "changed_installer_files": [
+    {
+      "name": "engine.py",
+      "size": 25217,
+      "sha256": "6a033ee7ba7be42b3ddc5fbac1fb89761aab195f1e5f3e3563b79ed7b154c00d",
+      "virustotal": "NOT_RECHECKED"
+    },
+    {
+      "name": "platform_launch.py",
+      "size": 11245,
+      "sha256": "ae46b1efd51068c2493eb752b2c960add6f995c6574093f39759b881bd0ba592",
+      "virustotal": "NOT_RECHECKED"
+    }
+  ],
+  "translation_payload_identical_to": "v1.0.0-r004",
+  "gameplay": {
+    "v1_0_1_on_reporter_pc": false,
+    "previous_r004_human_confirmed": true
+  },
+  "limitations": [
+    "No detection is not a safety guarantee.",
+    "Earlier VirusTotal results do not cover the changed files.",
+    "The reported server source is not included in this release."
+  ]
+}

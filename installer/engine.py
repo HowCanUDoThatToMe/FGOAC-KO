@@ -128,6 +128,12 @@ def acquire(args):
     doc = read(release); validate_release(doc)
     args.cache = child(package, 'payload')
     args.release_sha = digest(release)
+    # Keep the frozen translation payload identity separate from installer releases.
+    version = read(package / 'offline-manifest.json').get('version', doc['version'])
+    if not isinstance(version, str) or len(version) > 32 or not all(
+            part.isascii() and part.isdigit() for part in version.split('.')) or len(version.split('.')) != 3:
+        raise ValueError('배포 버전 형식이 올바르지 않습니다.')
+    doc = dict(doc, version=version)
     for i, asset in enumerate(doc['assets']):
         cancelled(args.cancel)
         path = child(args.cache, asset['name'])
@@ -140,20 +146,25 @@ def acquire(args):
 
 
 def verify_base(target, doc, cancel=None, previous=None):
-    for i, (rel, sha) in enumerate(doc['base_files'].items()):
+    for i, (rel, sha) in enumerate(doc['base_files'].items(), 1):
         cancelled(cancel)
         if rel == 'App/FGO_Launcher.ps1' and (previous or {}).get('platform_launcher'):
             from platform_launch import verify_base as verify_launcher_base
             verify_launcher_base(target, previous['platform_launcher'], sha)
         elif file_state(child(target, rel)) != sha:
             raise ValueError('지원 원본과 다르거나 없는 파일: ' + rel)
-        if i % 500 == 0:
+        if i % 500 == 0 or i == len(doc['base_files']):
             emit('게임 원본 검사 %d/%d' % (i, len(doc['base_files'])))
     if read(child(target, CONFIG)).get('gameVersion') != doc['game_version']:
         raise ValueError('지원 게임 버전 불일치')
+    server_record = None
     for rel, sha in doc.get('server_base_files', {}).items():
-        if file_state(child(target, rel)) != sha:
-            raise ValueError('지원 서버 원본과 다른 파일: ' + rel)
+        from platform_launch import SERVER_INDEX, verify_server_base
+        if rel != SERVER_INDEX:
+            raise ValueError('Unexpected original server compatibility scope')
+        server_record = verify_server_base(target, sha)
+        emit('서버 호환성 검사 통과: ' + server_record['profile'] + ' / ' + server_record['match'])
+    return server_record
 
 
 def reconstruct(target, staging, cache, doc, cancel=None):
@@ -289,7 +300,7 @@ def install(args, target, home, doc):
         raise ValueError('중단 기록이 있습니다. 먼저 복구를 실행하세요.')
     state_path = child(target, STATE)
     previous = read(state_path) if state_path.exists() else None
-    verify_base(target, doc, args.cancel, previous)
+    server_record = verify_base(target, doc, args.cancel, previous)
     # Synthetic packages without the native bridge retain their existing scope.
     launcher_record = launcher_blob = None
     language_record = routes_blob = None
@@ -298,6 +309,8 @@ def install(args, target, home, doc):
         from platform_launch import prepare, prepare_language
         launcher_record, launcher_blob = prepare(target, previous)
         language_record, routes_blob, companions = prepare_language(args.cache, doc)
+    from platform_launch import BOOTSTRAP, prepare_server_binding, verify_server_unchanged
+    bootstrap_blob, companions = prepare_server_binding(args.cache, doc, server_record, companions)
     files = {r['path'][len(PREFIX):]:r['sha256'] for r in doc['files'] if r['path'].startswith(PREFIX)}
     same_release = False
     if previous:
@@ -307,8 +320,11 @@ def install(args, target, home, doc):
         same_release = previous['installer_local']['release_sha256'] == args.release_sha
         if same_release and previous['files'] != files:
             raise ValueError('같은 배포본의 번역 파일 기록이 다릅니다.')
-        if (same_release and previous.get('platform_launcher') == launcher_record and
-                previous.get('platform_language') == language_record):
+        if (same_release and previous.get('version') == doc['version'] and
+                previous.get('platform_launcher') == launcher_record and
+                previous.get('platform_language') == language_record and
+                previous.get('server_compatibility') == server_record):
+            verify_server_unchanged(target, server_record)
             emit('이미 같은 승인본이 설치되어 있습니다. 파일 검사 통과.'); return
     elif child(target, OVERLAY).exists():
         raise ValueError('관리되지 않은 같은 이름 폴더가 있습니다.')
@@ -331,6 +347,8 @@ def install(args, target, home, doc):
             raise ValueError('이미 존재하는 서버 모듈은 덮어쓰지 않습니다: ' + rel)
         if routes_blob is not None and rel == 'Server/python/Lib/site-packages/fgo_ko_text_routes.py':
             after[rel] = routes_blob
+        elif bootstrap_blob is not None and rel == BOOTSTRAP:
+            after[rel] = bootstrap_blob
         else:
             after[rel] = snapshot(child(target if same_release else staging, rel))
         if blob_sha(after[rel]) != companions['files'][rel]:
@@ -347,6 +365,8 @@ def install(args, target, home, doc):
     if launcher_record:
         state['platform_launcher'] = launcher_record
         state['platform_language'] = language_record
+    if server_record:
+        state['server_compatibility'] = server_record
     cancelled(args.cancel)
     from process_guard import refuse_running
     refuse_running(target)
@@ -362,6 +382,7 @@ def install(args, target, home, doc):
         expected_launcher = (previous or {}).get('platform_launcher', {}).get('installed_sha256', launcher_record['original_sha256'])
         if file_state(child(target, launcher_record['path'])) != expected_launcher:
             raise ValueError('설치 도중 플랫폼 실행 스크립트가 변경되었습니다.')
+    verify_server_unchanged(target, server_record)
     # Preserve executable manager before activating anything. Never delete its package dependency.
     source_home = Path(__file__).resolve().parent
     import hashlib

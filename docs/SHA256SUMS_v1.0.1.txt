@@ -1,0 +1,3 @@
+10757e11c0af99da30617150e63cb6be901b192fb72313a913bc38b2509b4a1c *FGOAC-Korean-Offline-v1.0.1-1of2.zip
+8027cc6e54b879c1e4ec86db8ec25e1d25fb27ad2786ecd0a27ddd18a598fb46 *FGOAC-Korean-Offline-v1.0.1-2of2.zip
+7500837f8751a0270371b8e8ac30ede112765033049d6aa9997fe3b1605afe94 *FGOAC-Korean-v1.0.0-r004-to-v1.0.1-update.zip
