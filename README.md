@@ -9,6 +9,30 @@ Fate/Grand Order Arcade의 텍스트와 화면 속 글자를 한국어로 옮기
 
 **공유 대상은 한국어 패치와 설치에 필요한 구성요소뿐입니다. 게임 본체, 원본 게임 실행 파일, 원본 또는 완성된 FARC 전체, 세이브와 개인 설정은 배포하지 않습니다.** 지원되는 게임 파일을 정당한 권한으로 이용할 수 있는 환경이 별도로 필요합니다. 이 프로젝트는 게임 본체의 입수 경로를 제공하지 않습니다.
 
+## 번역 이미지 미리보기
+
+이번 작업에서 한국어로 번역·편집한 이미지 중 일부입니다. **실제 플레이 화면 캡처가 아닌, 게임 화면을 구성하는 개별 이미지 예시**입니다. 사용자 제공 스크린샷이나 직접 제작해 전달한 번역 이미지는 이 미리보기에 포함하지 않았습니다. 이미지를 누르면 원래 크기로 볼 수 있습니다.
+
+| 서번트 카드 · 에레쉬키갈 | 보구 카드 · 마슈 | 보구 카드 · 카르나 |
+| :---: | :---: | :---: |
+| <a href="docs/images/servant-ereshkigal.png"><img src="docs/images/servant-ereshkigal.png" width="230" alt="에레쉬키갈의 한국어 이름이 적용된 서번트 카드"></a> | <a href="docs/images/noble-mash-camelot.png"><img src="docs/images/noble-mash-camelot.png" width="230" alt="마슈의 로드 카멜롯 한국어 보구명 배치 예시"></a> | <a href="docs/images/noble-karna-shakti.png"><img src="docs/images/noble-karna-shakti.png" width="230" alt="카르나의 바사비 샤크티 한국어 보구명 배치 예시"></a> |
+
+서번트 카드는 한국어 이름 표기 예시입니다. 보구 카드 두 장은 **번역한 보구명과 원작 카드 부품을 조합해 작업 당시 만든 배치 참고 이미지**이며, 실제 게임에서의 배치·효과와 차이가 있을 수 있습니다.
+
+| 상점 · 월간 영의 조각 교환 | 상점 · 영의 조각 증량권 구매 |
+| :---: | :---: |
+| [![월간 영의 조각 교환 메뉴의 한국어 번역 이미지](docs/images/shop-costume.png)](docs/images/shop-costume.png) | [![영의 조각 증량권 구매 메뉴의 한국어 번역 이미지](docs/images/shop-tickets.png)](docs/images/shop-tickets.png) |
+
+**전투 · 마신주 출현 안내**
+
+[![마신주 출현 안내의 한국어 번역 이미지](docs/images/battle-boss.png)](docs/images/battle-boss.png)
+
+**전투 · 다음 출격 서번트 패널**
+
+[![다음 출격 서번트 패널의 한국어 번역 이미지](docs/images/battle-sortie.png)](docs/images/battle-sortie.png)
+
+개별 이미지의 투명 영역에는 게임 실행 중 배경·캐릭터·상태 정보가 합성됩니다. 전체 번역 범위와 실제 화면 검수 범위는 아래 안내를 확인해 주세요. 원작 이미지의 권리는 각 권리자에게 있습니다.
+
 ## 무엇이 바뀌나요?
 
 - 게임의 번역 텍스트, 일부 실행 코드·서버 표시 문구와 한글 글꼴을 적용합니다.
