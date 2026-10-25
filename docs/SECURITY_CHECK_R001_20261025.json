@@ -1,0 +1,58 @@
+{
+  "date_kst": "2026-10-25",
+  "candidate": "offline r001",
+  "scanner": "Microsoft Defender Antivirus",
+  "platform_version": "4.18.26090.9",
+  "engine_version": "1.1.26090.9",
+  "security_intelligence_version": "1.461.196.0",
+  "scan_command_options": [
+    "-Scan",
+    "-ScanType",
+    "3",
+    "-File",
+    "<target>",
+    "-DisableRemediation"
+  ],
+  "scans": [
+    {
+      "start_utc": "2026-10-25T13:17:33.0787904+00:00",
+      "end_utc": "2026-10-25T13:17:46.9304315+00:00",
+      "duration_seconds": 13.8321895,
+      "exit_code": 0,
+      "disable_remediation": true,
+      "target": "candidate-r001 folder",
+      "console_result": "found no threats"
+    },
+    {
+      "start_utc": "2026-10-25T13:18:54.7821429+00:00",
+      "end_utc": "2026-10-25T13:18:55.2832442+00:00",
+      "duration_seconds": 0.4936937,
+      "exit_code": 0,
+      "disable_remediation": true,
+      "target": "fgoko-labels.dll (same SHA-256 as r001 payload)",
+      "console_result": "found no threats"
+    }
+  ],
+  "candidate_archive_bindings": [
+    {
+      "name": "FGOAC-Korean-Offline-v1.0.0-1of2.zip",
+      "bytes": 1958179397,
+      "sha256": "c2e90c8c0936ca9b35fb4a2350c3f89666cb7daa4dacd91bc8435297534197d8"
+    },
+    {
+      "name": "FGOAC-Korean-Offline-v1.0.0-2of2.zip",
+      "bytes": 2143696274,
+      "sha256": "0894647fcd047d2f5ad603ff44c49239927735b9bbe11294ede3c09e3996b6f3"
+    }
+  ],
+  "native_dll_sha256": "44f17bb95f75cc0f9ed0b35de52f0e84d567dd80ba6dabb714769dc0db57b04e",
+  "virustotal_scan_performed": false,
+  "file_upload_performed": false,
+  "limitations": [
+    "Console output does not report actual per-file coverage or scan counts.",
+    "Folder scan includes packaged delta archives, not a reconstructed and running game.",
+    "No live network capture or game execution was performed.",
+    "A no-threat result is not a guarantee of safety; changes require a new scan."
+  ],
+  "source": "Local MpCmdRun console results and previously verified candidate/archive hashes; no personal absolute paths included."
+}
