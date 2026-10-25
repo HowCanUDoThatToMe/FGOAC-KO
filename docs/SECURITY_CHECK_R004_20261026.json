@@ -1,0 +1,71 @@
+{
+  "release": "v1.0.0-r004",
+  "date_kst": "2026-10-26",
+  "archives": [
+    {
+      "name": "FGOAC-Korean-Offline-v1.0.0-1of2.zip",
+      "sha256": "006a3d17582a44ac2c8ed16a4357eacd1f4addf730f95a22f5704bb4ee7d1eac",
+      "size": 1958431762
+    },
+    {
+      "name": "FGOAC-Korean-Offline-v1.0.0-2of2.zip",
+      "sha256": "4e356ace868ba81f445364bb5caad518dd4426e954122a9a979f35335988df18",
+      "size": 2143696274
+    }
+  ],
+  "defender": {
+    "revision": "r004-platform-language-with-MIT",
+    "started_utc": "2026-10-25T15:15:17.5143819Z",
+    "seconds": 12.8926618,
+    "exit_code": 0,
+    "output": "Scan starting...\r\nScan finished.\r\nScanning <candidate-r004-release> found no threats."
+  },
+  "automated_tests": {
+    "passed": 23,
+    "failed": 0,
+    "scope": "Installation, removal, interruption recovery and launch guards; synthetic fixtures"
+  },
+  "isolated_installation": {
+    "exit_code": 0,
+    "game_launched": false,
+    "installed_launcher_sha256": "a3351d731112cc20ecdc1b067740379cd879a2c6e15ce629b43766b619ada76d",
+    "installed_routes_sha256": "08598f841e02177f5ce0836df90d39327c52478a8c9df8f12db2be7b8f238c7e",
+    "original_launcher_backup_exact": true,
+    "other_configuration_values_unchanged": true,
+    "overlay_hashes_and_file_ids_unchanged": true,
+    "powershell_parse_and_five_language_branches": true,
+    "powershell_uses_default_module_path": true,
+    "revision": "r004-platform-language",
+    "seconds": 265.67,
+    "selected_game_language": "ko",
+    "server_five_language_branches": true,
+    "status": "PASSED",
+    "translated_files": 4364
+  },
+  "human_gameplay_check": {
+    "date_kst": "2026-10-26",
+    "confirmed": true,
+    "scope": "User confirmed normal Korean screens and game launch on the r004 test copy; not an exhaustive review of every UI or PC"
+  },
+  "archive_review": {
+    "engine_manifest_hashes_match": true,
+    "outer_file_count": 1094,
+    "outer_duplicates": 0,
+    "outer_candidate_mismatches": [],
+    "private_named_outer_files": [],
+    "candidate_files_absent_from_outer": [],
+    "files_scanned_count": 1755,
+    "pattern_hits_needing_review": []
+  },
+  "changed_code_sha256": {
+    "engine/engine.py": "7a1e56ebdd0f546f2ff6fef37a9bd397b4d61596145689dd69440b13a899ecb5",
+    "engine/native_label_support.py": "964e63a04a1ab4591f414c53359a388c60e78751003afaf89a87b6a08edfd015",
+    "engine/platform_launch.py": "037aadb57c00fbe1488cf21f13c8c740dfb269b91b480efe23bed9bf43fdbe7e"
+  },
+  "virustotal_changed_code": "NOT_SCANNED: previous engine hashes do not cover these r004 files",
+  "limits": [
+    "No guarantee of complete safety or absence of every form of private data.",
+    "Static patterns do not replace live network or behavioral analysis.",
+    "MIT applies only to the explicitly listed installer sources."
+  ]
+}

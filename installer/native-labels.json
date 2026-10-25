@@ -1,0 +1,23 @@
+{
+  "format": 1,
+  "kind": "ko-bond-tab-v1",
+  "payload": "native/fgoko-labels.dll",
+  "installed_relative": "native/fgoko-labels.dll",
+  "sha256": "44f17bb95f75cc0f9ed0b35de52f0e84d567dd80ba6dabb714769dc0db57b04e",
+  "base_files": {
+    "ago.exe": "852119518ebf1244ead307d1bd7e0ce5ce7a2efcd820136e03810419dd827240",
+    "fgohook.dll": "01382853521d0a713d7dbd8ca1f53e8b54c3313a0497de62b86145ca704c484b",
+    "fgozh.dll": "b7791cbd8ab9d27f02b10136d5f27e8cf0ca4a7886f288cac4eb3ba3c01ed571",
+    "FGO_Launcher.ps1": "74cf22e51f5262a6692dc7b82e4d1fd0c6ad7191076a7b06b592fd948a985658",
+    "inject.exe": "2008b77602bcd5afd03734f14a6d8681a00769f8809c8a1aee2eaba21827f93a"
+  },
+  "labels": [
+    {
+      "id": "title-selection.bond",
+      "source": "絆",
+      "translation": "인연"
+    }
+  ],
+  "scope": "One verified four-argument native string-copy call; startup loading only.",
+  "runtime_verified": false
+}

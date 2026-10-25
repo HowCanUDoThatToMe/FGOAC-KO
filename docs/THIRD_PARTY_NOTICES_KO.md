@@ -1,6 +1,6 @@
 # 크레딧·제3자 고지
 
-> 2026-10-25 오프라인 r002 구성과 대조한 고지. 이 요약은 각 라이선스의 전문을 대신하지 않는다. 언급된 제작자는 이 패치를 승인하거나 보증한 것으로 표시하지 않는다.
+> 2026-10-26 오프라인 r004 기준. 기존 r002 구성품의 고지를 유지하고 자체 설치기 코드의 MIT 적용 범위를 추가했다. 이 요약은 각 라이선스의 전문을 대신하지 않는다. 언급된 제작자는 이 패치를 승인하거나 보증한 것으로 표시하지 않는다.
 
 ## 공통 고지 문안
 
@@ -19,6 +19,8 @@ Fate/Grand Order Arcade와 관련한 게임 프로그램·원문·이미지·음
 Codex와 기타 도구의 언급은 도구 제공사의 공식 참여·승인·후원이나 원작에 대한 권리 허락을 뜻하지 않습니다.
 
 ## 도구와 구성요소
+
+**자체 설치기 코드** — [명시한 9개 소스 파일](../installer/LICENSE_SCOPE.md)에 [MIT License](../installer/LICENSE)를 적용합니다. `Copyright (c) 2026 HowCanUDoThatToMe` 및 MIT 전문을 유지합니다. 배포 ZIP에도 `engine/licenses/FGOAC-KO-Installer-MIT.txt`와 적용 범위를 동봉합니다. 게임·번역·이미지·차분 자료, 생성된 게임 스크립트 전체나 아래 외부 구성품을 이 MIT로 재허락하지 않습니다.
 
 **[PhotoCraft](https://github.com/storytold/photocraft)** — 이미지 편집·크기 조정·투명도 확인·저장 및 PNG 내보내기에 사용한 오픈소스 도구입니다. 작업 기록에서 v0.15.1 사용을 확인했습니다. ArtCraft Team 및 PhotoCraft contributors의 프로젝트이며, 해당 버전은 [MIT](https://github.com/storytold/photocraft/blob/v0.15.1/LICENSE-MIT) 또는 [Apache-2.0](https://github.com/storytold/photocraft/blob/v0.15.1/LICENSE-APACHE) 라이선스를 선택할 수 있습니다. 여기서는 제작 도구 사용 사실을 밝히며 PhotoCraft 프로그램 자체를 패치에 동봉하지 않습니다.
 
