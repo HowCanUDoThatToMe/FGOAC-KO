@@ -1,0 +1,81 @@
+{
+  "release": "v1.0.0-r004",
+  "observed_at_kst": "2026-10-26T00:34:00+09:00",
+  "scope": "Post-publication VirusTotal report lookup for the three changed r004 installer files; not an analysis of the full ZIP or reconstructed game.",
+  "observation_method": "Read-only detection pages and visible vendor status icons; no upload or reanalysis initiated by Codex during this check.",
+  "supersedes": "The NOT_SCANNED status in the earlier publication-time security record for these three exact hashes only.",
+  "files": [
+    {
+      "name": "engine.py",
+      "sha256": "7a1e56ebdd0f546f2ff6fef37a9bd397b4d61596145689dd69440b13a899ecb5",
+      "size": 23819,
+      "last_analysis_kst": "2026-10-26T00:29:19+09:00",
+      "displayed_result": "0/40",
+      "stats": {
+        "undetected": 40,
+        "malicious": 0,
+        "suspicious": 0,
+        "confirmed_timeout": 2,
+        "timeout": 20,
+        "type_unsupported": 11,
+        "failure": 2
+      },
+      "report_url": "https://www.virustotal.com/gui/file/7a1e56ebdd0f546f2ff6fef37a9bd397b4d61596145689dd69440b13a899ecb5",
+      "release_file_sha256_matches": true
+    },
+    {
+      "name": "native_label_support.py",
+      "sha256": "964e63a04a1ab4591f414c53359a388c60e78751003afaf89a87b6a08edfd015",
+      "size": 7599,
+      "last_analysis_kst": "2026-10-26T00:29:43+09:00",
+      "displayed_result": "0/61",
+      "stats": {
+        "undetected": 61,
+        "malicious": 0,
+        "suspicious": 0,
+        "confirmed_timeout": 1,
+        "timeout": 0,
+        "type_unsupported": 13,
+        "failure": 0
+      },
+      "report_url": "https://www.virustotal.com/gui/file/964e63a04a1ab4591f414c53359a388c60e78751003afaf89a87b6a08edfd015",
+      "release_file_sha256_matches": true
+    },
+    {
+      "name": "platform_launch.py",
+      "sha256": "037aadb57c00fbe1488cf21f13c8c740dfb269b91b480efe23bed9bf43fdbe7e",
+      "size": 3629,
+      "last_analysis_kst": "2026-10-26T00:31:24+09:00",
+      "displayed_result": "0/61",
+      "stats": {
+        "undetected": 61,
+        "malicious": 0,
+        "suspicious": 0,
+        "confirmed_timeout": 1,
+        "timeout": 0,
+        "type_unsupported": 13,
+        "failure": 0
+      },
+      "report_url": "https://www.virustotal.com/gui/file/037aadb57c00fbe1488cf21f13c8c740dfb269b91b480efe23bed9bf43fdbe7e",
+      "release_file_sha256_matches": true
+    }
+  ],
+  "unchanged_release_archives": [
+    {
+      "name": "FGOAC-Korean-Offline-v1.0.0-1of2.zip",
+      "sha256": "006a3d17582a44ac2c8ed16a4357eacd1f4addf730f95a22f5704bb4ee7d1eac",
+      "size": 1958431762
+    },
+    {
+      "name": "FGOAC-Korean-Offline-v1.0.0-2of2.zip",
+      "sha256": "4e356ace868ba81f445364bb5caad518dd4426e954122a9a979f35335988df18",
+      "size": 2143696274
+    }
+  ],
+  "limits": [
+    "Undetected, timeout, confirmed timeout, unsupported file type and failed analysis are separate statuses.",
+    "engine.py has 22 total timeout/confirmed-timeout statuses and 2 failed analyses; this is not a complete result from every vendor.",
+    "Values reflect the observation time and can change.",
+    "No detection is not a guarantee of safety or proof of absence of data exfiltration."
+  ]
+}
