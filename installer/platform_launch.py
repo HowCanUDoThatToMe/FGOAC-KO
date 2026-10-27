@@ -196,10 +196,13 @@ def prepare(target, previous=None):
         original = base64.b64decode(old['original_base64'], validate=True)
     else:
         original = child(target, LAUNCHER).read_bytes()
-    if byte_digest(original) != BASE_HASHES['FGO_Launcher.ps1']:
-        raise ValueError('지원 원본과 다른 플랫폼 실행 스크립트입니다.')
-    patched = render_launcher(original, descriptor, persistent=True)
-    record = dict(format=1, path=LAUNCHER,
+    import launcher_compat
+    if byte_digest(original) == BASE_HASHES['FGO_Launcher.ps1']:
+        patched = render_launcher(original, descriptor, persistent=True)
+        launcher_compat.inspect_source(launcher_compat.decode(patched))
+    else:
+        patched = launcher_compat.render(original, descriptor)
+    record = dict(format=2, path=LAUNCHER, baseline_sha256=BASE_HASHES['FGO_Launcher.ps1'],
                   original_base64=base64.b64encode(original).decode('ascii'),
                   original_sha256=byte_digest(original),
                   installed_sha256=byte_digest(patched))
@@ -207,16 +210,34 @@ def prepare(target, previous=None):
 
 
 def verify(target, record):
-    if record.get('format') != 1 or record.get('path') != LAUNCHER:
+    if record.get('format') not in (1, 2) or record.get('path') != LAUNCHER:
         raise ValueError('플랫폼 실행 스크립트 관리 기록이 올바르지 않습니다.')
     original = base64.b64decode(record['original_base64'], validate=True)
-    if record.get('original_sha256') != BASE_HASHES['FGO_Launcher.ps1'] or byte_digest(original) != record['original_sha256']:
+    if byte_digest(original) != record['original_sha256']:
         raise ValueError('플랫폼 실행 스크립트 원본 백업이 변경되었습니다.')
+    if record['format'] == 1 and record['original_sha256'] != BASE_HASHES['FGO_Launcher.ps1']:
+        raise ValueError('이전 플랫폼 실행 스크립트 원본 백업의 버전이 다릅니다.')
+    if record['format'] == 2:
+        if record.get('baseline_sha256') != BASE_HASHES['FGO_Launcher.ps1']:
+            raise ValueError('플랫폼 실행 스크립트의 호환성 기준이 다릅니다.')
+        verify_original(original, record['baseline_sha256'])
     if digest(child(target, LAUNCHER)) != record['installed_sha256']:
         raise ValueError('플랫폼 실행 스크립트가 변경되어 자동 덮어쓰기/제거를 거부합니다.')
 
 
 def verify_base(target, record, expected):
-    verify(target, record)
-    if record['original_sha256'] != expected:
-        raise ValueError('플랫폼 실행 스크립트의 원본 버전이 다릅니다.')
+    if record:
+        verify(target, record)
+        original = base64.b64decode(record['original_base64'], validate=True)
+    else:
+        original = child(target, LAUNCHER).read_bytes()
+    verify_original(original, expected)
+
+
+def verify_original(original, expected):
+    if byte_digest(original) == expected:
+        return
+    if expected != BASE_HASHES['FGO_Launcher.ps1']:
+        raise ValueError('플랫폼 실행 스크립트의 지원 기준이 다릅니다.')
+    from launcher_compat import compatible
+    compatible(original)

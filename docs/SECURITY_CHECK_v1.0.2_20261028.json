@@ -1,0 +1,78 @@
+{
+  "actual_game_screen_verified": true,
+  "archives": [
+    {
+      "name": "FGOAC-Korean-Offline-v1.0.2-1of2.zip",
+      "size": 1958614050,
+      "sha256": "ddb18605ddf1d9b72c6e3a8de741ecfe1d2eb0fed5a5f36ca2de96490e7f2320"
+    },
+    {
+      "name": "FGOAC-Korean-Offline-v1.0.2-2of2.zip",
+      "size": 2143696274,
+      "sha256": "e859724c105a88414a64ea70b4c2dbe79613dff88dac7091223dbf8658aada77"
+    }
+  ],
+  "automated_tests": {
+    "errors": 0,
+    "failures": 0,
+    "game_executed": false,
+    "passed": true,
+    "seconds": 33.11767601966858,
+    "tests": 41
+  },
+  "candidate_inventory_sha256": "adba1985c8ae2b05832df4f8586b43239922d9ee0f5c75918a5b8af0e9a48186",
+  "changed_source_files": {
+    "common.py": {
+      "sha256": "dfc10f156f9b3e930f67dbd70e0fe3c2da713ea23d8e0b3253d6341792666987",
+      "virustotal_status": "NOT_VERIFIED_FOR_THIS_HASH"
+    },
+    "engine.py": {
+      "sha256": "3a6a44296a17de00b0c7251ec92b75b36af64a8552fc7fd219e1da274d328e17",
+      "virustotal_status": "NOT_VERIFIED_FOR_THIS_HASH"
+    },
+    "launcher_compat.py": {
+      "sha256": "c83775ea9baa33251c22375e084a7e419381a4904f573dd0f2a091927ce39802",
+      "virustotal_status": "NOT_VERIFIED_FOR_THIS_HASH"
+    },
+    "offline_config.py": {
+      "sha256": "d155b6991354704d8d6bbf00c8fd5014610a8779f2558d8fa7a4f9872aaf78d1",
+      "virustotal_status": "NOT_VERIFIED_FOR_THIS_HASH"
+    },
+    "platform_launch.py": {
+      "sha256": "f434f3718060c3a722db8173d7cfee122cc152d7ba2b7fffe2e1287810edcaae",
+      "virustotal_status": "NOT_VERIFIED_FOR_THIS_HASH"
+    }
+  },
+  "date_kst": "2026-10-28",
+  "defender": {
+    "start": "2026-10-28T00:29:46.4927269+09:00",
+    "end": "2026-10-28T00:30:03.3719345+09:00",
+    "duration_seconds": 16.8792076,
+    "exit_code": 0,
+    "remediation_disabled": true,
+    "result": "NO_THREATS_FOUND",
+    "scan_type": "Custom scan of the complete candidate folder; not a whole-PC or boot-time offline scan"
+  },
+  "error_message_cases": 4,
+  "limitations": [
+    "No whole-PC or boot-time offline scan was performed.",
+    "Zero detections are not a safety guarantee or proof of no data transmission.",
+    "Older VirusTotal results do not apply to changed files."
+  ],
+  "privacy": {
+    "archive_files_verified": 1097,
+    "archive_mismatches": [],
+    "files_scanned": 1757,
+    "pattern_hits": [],
+    "private_named_files": [],
+    "scope": "Static pattern and source review; not live network monitoring"
+  },
+  "real_launcher_cases": 6,
+  "release": "v1.0.2",
+  "release_manifest_sha256": "ea92a2cd07d4e8064403c83376f75c666896881b46ab007f51749d98b60eb406",
+  "status": "VERIFIED_RELEASE_ARTIFACTS",
+  "human_acceptance": {
+    "date_kst": "2026-10-28",
+    "source": "User confirmed normal test after running platform as administrator"
+  }
+}

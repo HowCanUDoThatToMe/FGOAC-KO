@@ -148,14 +148,17 @@ def acquire(args):
 def verify_base(target, doc, cancel=None, previous=None):
     for i, (rel, sha) in enumerate(doc['base_files'].items(), 1):
         cancelled(cancel)
-        if rel == 'App/FGO_Launcher.ps1' and (previous or {}).get('platform_launcher'):
+        if rel == 'App/FGO_Launcher.ps1':
             from platform_launch import verify_base as verify_launcher_base
-            verify_launcher_base(target, previous['platform_launcher'], sha)
+            verify_launcher_base(target, (previous or {}).get('platform_launcher'), sha)
         elif file_state(child(target, rel)) != sha:
             raise ValueError('지원 원본과 다르거나 없는 파일: ' + rel)
         if i % 500 == 0 or i == len(doc['base_files']):
             emit('게임 원본 검사 %d/%d' % (i, len(doc['base_files'])))
-    if read(child(target, CONFIG)).get('gameVersion') != doc['game_version']:
+    config = read(child(target, CONFIG))
+    if not isinstance(config, dict) or 'gameVersion' not in config:
+        raise ValueError('게임 설정 형식 또는 gameVersion 항목 오류: App/fgo-launcher.json. 정상 설정 백업을 확인해 주세요.')
+    if config.get('gameVersion') != doc['game_version']:
         raise ValueError('지원 게임 버전 불일치')
     server_record = None
     for rel, sha in doc.get('server_base_files', {}).items():
@@ -295,6 +298,19 @@ def commit_transaction(target, home, staging, state, after, before_overlay, afte
         raise
 
 
+def verify_addon_upgrade(previous, doc, files):
+    """Require explicit, pinned integration before replacing an installed addon."""
+    integrated = doc.get('integrated_addons', {})
+    old = dict(previous.get('integrated_addons', {}))
+    old.update(previous.get('addons', {}))
+    for name, record in old.items():
+        new = integrated.get(name)
+        if (not new or new.get('manifest_sha256') != record.get('manifest_sha256') or
+                not new.get('files') or any(files.get(p) != h for p, h in new['files'].items())):
+            raise ValueError('기존 추가 수정의 유지 여부를 확인할 수 없습니다: ' + name +
+                             '. 해당 수정이 포함된 정식 업데이트를 사용해 주세요. 설치 파일은 유지됩니다.')
+
+
 def install(args, target, home, doc):
     if (home / 'pending.json').exists():
         raise ValueError('중단 기록이 있습니다. 먼저 복구를 실행하세요.')
@@ -313,6 +329,7 @@ def install(args, target, home, doc):
     bootstrap_blob, companions = prepare_server_binding(args.cache, doc, server_record, companions)
     files = {r['path'][len(PREFIX):]:r['sha256'] for r in doc['files'] if r['path'].startswith(PREFIX)}
     same_release = False
+    retain_overlay = False
     if previous:
         verify_owned(target, previous)
         if not previous.get('installer_local'):
@@ -320,6 +337,13 @@ def install(args, target, home, doc):
         same_release = previous['installer_local']['release_sha256'] == args.release_sha
         if same_release and previous['files'] != files:
             raise ValueError('같은 배포본의 번역 파일 기록이 다릅니다.')
+        verify_addon_upgrade(previous, doc, files)
+        retain_overlay = previous['files'] == files
+        # Derived routing/bootstrap files are prepared above. Other companions
+        # must already match before their installed copy can be reused.
+        retain_overlay = retain_overlay and all(
+            rel in (BOOTSTRAP, 'Server/python/Lib/site-packages/fgo_ko_text_routes.py') or
+            file_state(child(target, rel)) == sha for rel, sha in companions['files'].items())
         if (same_release and previous.get('version') == doc['version'] and
                 previous.get('platform_launcher') == launcher_record and
                 previous.get('platform_language') == language_record and
@@ -328,12 +352,12 @@ def install(args, target, home, doc):
             emit('이미 같은 승인본이 설치되어 있습니다. 파일 검사 통과.'); return
     elif child(target, OVERLAY).exists():
         raise ValueError('관리되지 않은 같은 이름 폴더가 있습니다.')
-    need = (0 if same_release else sum(r['size'] for r in doc['files'])) + 1024 ** 3
+    need = (0 if retain_overlay else sum(r['size'] for r in doc['files'])) + 1024 ** 3
     if shutil.disk_usage(target).free < need:
         raise ValueError('임시 설치·복구 공간 부족')
     tx = home / ('transaction-' + uuid.uuid4().hex); tx.mkdir()
     staging = tx / 'staging'; staging.mkdir()
-    if not same_release:
+    if not retain_overlay:
         reconstruct(target, staging, args.cache, doc, args.cancel)
     before_config = child(target, CONFIG).read_bytes()
     cfg = json.loads(before_config.decode('utf-8-sig'))
@@ -350,7 +374,7 @@ def install(args, target, home, doc):
         elif bootstrap_blob is not None and rel == BOOTSTRAP:
             after[rel] = bootstrap_blob
         else:
-            after[rel] = snapshot(child(target if same_release else staging, rel))
+            after[rel] = snapshot(child(target if retain_overlay else staging, rel))
         if blob_sha(after[rel]) != companions['files'][rel]:
             raise ValueError('서버 언어 연결 결과 불일치: ' + rel)
     cfg['gameLanguage'] = 'ko' if language_record else 'ko-fgoac'
@@ -367,6 +391,8 @@ def install(args, target, home, doc):
         state['platform_language'] = language_record
     if server_record:
         state['server_compatibility'] = server_record
+    if doc.get('integrated_addons'):
+        state['integrated_addons'] = doc['integrated_addons']
     cancelled(args.cancel)
     from process_guard import refuse_running
     refuse_running(target)
@@ -403,7 +429,7 @@ exit $LASTEXITCODE
     after[HOME + '/Manage-KoreanPatch.ps1'] = base64.b64encode(management.encode('utf-8-sig')).decode()
     save(home / 'release.json', doc)
     commit_transaction(target, home, staging, state, after, previous['files'] if previous else None,
-                       files, 'upgrade' if previous else 'install', retain_overlay=same_release)
+                       files, 'upgrade' if previous else 'install', retain_overlay=retain_overlay)
     emit('설치 완료: %s / %d개 파일. 실제 게임 화면 검수와는 별도입니다.' % (doc['version'], len(files)))
 
 
@@ -482,7 +508,13 @@ def main():
                     emit(json.dumps(dict(installed=True, version=state['version'], integrity=True,
                          manifest_sha256=state['package_manifest_sha256']), ensure_ascii=False))
         return 0
-    except (ValueError, OSError, KeyError, zipfile.BadZipFile) as e:
+    except KeyError as e:
+        emit('ERROR: 설정 또는 배포 기록의 필수 항목이 없습니다: ' + str(e) +
+             '. 선택한 게임 폴더와 배포 파일을 확인하고 오류 기록을 제보해 주세요.'); return 2
+    except OSError as e:
+        emit('ERROR: 파일 접근 또는 저장 실패: ' + str(e) +
+             '\n게임·서버 종료 여부, 파일 권한과 남은 디스크 공간을 확인해 주세요. 중단 기록이 있으면 복구를 실행하세요.'); return 2
+    except (ValueError, zipfile.BadZipFile) as e:
         emit('ERROR: ' + str(e)); return 2
 
 

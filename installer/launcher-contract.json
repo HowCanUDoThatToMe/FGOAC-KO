@@ -1,0 +1,54 @@
+{
+  "baseline_sha256": "74cf22e51f5262a6692dc7b82e4d1fd0c6ad7191076a7b06b592fd948a985658",
+  "format": 1,
+  "order": [
+    "launcharguments",
+    "gamelanguage",
+    "uselocalization",
+    "hook",
+    "game_argument",
+    "quotedlauncharguments",
+    "injectstartinfo",
+    "arguments",
+    "useshellexecute",
+    "language_environment",
+    "startinfo"
+  ],
+  "roles": {
+    "arguments": [
+      "d61b914e702f21ef4ef0630ab0013a1a896c13d55bf14c6301814b409edb2e7b"
+    ],
+    "game_argument": [
+      "477807002cd72cf24e9c2a0c85c4df6f3105a1917c7da0786634d8ea1f17e0d5"
+    ],
+    "gamelanguage": [
+      "569ffe007bd1121e082db4fab48c0f4717e36a619d9a3c9c8a4eae8b0fbb0678",
+      "84d98a6fb7e47665a60aa97b31b7f7749f46f9e2b2ae7a6ae63b53617405f4f7",
+      "83da264497f6691c57441b7ca6bb6bdcd7d741b2f149d8dcf0fca5463ee3191f"
+    ],
+    "hook": [
+      "27575f637ddac17066fcf660b5a71be4bce048eecfa9ec5233c5e937c40fe116"
+    ],
+    "injectstartinfo": [
+      "7a7b0941424924ee449d37088101d64b6e2166ce309265500b56ae8caede297a"
+    ],
+    "language_environment": [
+      "39d470d99f1d5c834bfb46f5c935cf261fa231fb55b5a00ca0e944fd6423ba02"
+    ],
+    "launcharguments": [
+      "f59e59241935ebb12f5c91e2463a96506ff9f2dd1e6687c0d6ef17379bd02cbb"
+    ],
+    "quotedlauncharguments": [
+      "4c90a31bbcfa6fec813c303b486a3b4321eb80eb13dbe05638f28866b793f8dc"
+    ],
+    "startinfo": [
+      "7c38cf4c142fca5d521e52e5fe85ecf6f4b1d25dcbb4c3e15eaa0abc5e4b2fdf"
+    ],
+    "uselocalization": [
+      "2a6de9d003042970c0377e580e768359fcb1a2aa541f71ba30d96d2a150c155b"
+    ],
+    "useshellexecute": [
+      "dbd01f15e4787a9c1d8f220dfd73922187794a356fae415097cc9610e1ba150e"
+    ]
+  }
+}

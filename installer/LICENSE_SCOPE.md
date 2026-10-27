@@ -3,6 +3,7 @@
 2026-10-26부터 아래 자체 설치기 소스에 MIT License를 적용합니다. GitHub의 `installer/`와 배포 ZIP의 `engine/`에서 같은 이름의 파일을 뜻합니다.
 
 - `common.py`
+- `launcher_compat.py`
 - `engine.py`
 - `native_label_support.py`
 - `offline_config.py`
