@@ -1,0 +1,97 @@
+{
+  "version": "1.0.3",
+  "record_date_kst": "2026-10-30",
+  "assets": [
+    {
+      "name": "FGOAC-Korean-Offline-v1.0.3-1of2.zip",
+      "sha256": "13f1421f6c00bfe90a9c98831629739afb0bd8de70e2c894e530ee614e9f8697",
+      "size": 1958821693
+    },
+    {
+      "name": "FGOAC-Korean-Offline-v1.0.3-2of2.zip",
+      "sha256": "0171fe5826d9f97776e14a9ac370e03697ba9551d2e63409ed98cb7b2e5c741a",
+      "size": 2143696274
+    }
+  ],
+  "translation_release_sha256": "ea92a2cd07d4e8064403c83376f75c666896881b46ab007f51749d98b60eb406",
+  "tested_engine_sources_unchanged": true,
+  "public_installer_source_sha256": {
+    "FGO_KoNetwork.ps1": "51466e1eee893cae04ff88e2d955c4b5b65ec0ecb9d97b067aeafb9bbfe737af",
+    "FGO_KoServerCleanup.ps1": "e209eeb1b2a2b0909688c900eb346e1fa76e638c47ee95111196728cc149121b",
+    "FGO_KoServerConfig.py": "7323f3bd07f8165a162002e3804f374f2311dcacc0ae7acc8c6fedbb14ff2114",
+    "common.py": "dfc10f156f9b3e930f67dbd70e0fe3c2da713ea23d8e0b3253d6341792666987",
+    "engine.py": "f1e34c885aeaed11ce8776931354cfdafc9f20d26cf5b10f64aeef7274a2abb1",
+    "launcher-contract.json": "df398e9f61f412e46c5556be0b391757f8d222b440e3ec7adce8652aa4a35a66",
+    "launcher-profiles.json": "0df5d976dc1a2b116ea698039d784a4b1dceff5f9a7d50fde9f30f0345b58996",
+    "launcher_analysis.ps1": "ebfee72f3aaba0e2da261f0d2b1b18fef59f690dd323f4b923167715c70a96fa",
+    "launcher_compat.py": "9adf67e0ce1934c167eea3521b7d6138b2884c33f979ac656df1e19da32c2b34",
+    "launcher_profiles.py": "01f5e628fe9e576cdd7c4443cba8efe4b1505b7efa6b49747d986fef1d15ff48",
+    "native-labels.json": "91c8fa71d76e956740607165c18edfcf1cc1b8534ab11e860709dca8ef5ceea5",
+    "native_label_support.py": "964e63a04a1ab4591f414c53359a388c60e78751003afaf89a87b6a08edfd015",
+    "network_analysis.ps1": "db18d2864c6232099d9c7cf3e350eea6b03ceb20318e6ab4269e97291309af17",
+    "network_compat.py": "d1eec3b3d8306f705009ca2d65540f441abbfb08a5f431afd0139456ba555e1b",
+    "network_launcher.py": "d9e7f8e5e30cb489f8bf9ddce90aa8a1bcf47e652ecb9274961fbcc3810e4dd4",
+    "offline_config.py": "d155b6991354704d8d6bbf00c8fd5014610a8779f2558d8fa7a4f9872aaf78d1",
+    "offline_support.py": "21a99ea2655117e9d93859e965585276b7fdef497071b15bdc70e874c82c1cf2",
+    "offline_ui.py": "ac174a07a17de0dcdc23544dbd4be52b3b31bd4458c79af75f2582e285718752",
+    "platform_launch.py": "5331025880180c606ed706ab9d3e8760447513eef5803741560ff65c475bf2cb",
+    "process_guard.py": "94859237c3a309ca73a869dc9cc833d0397e9fb930f954097c2b6ac6a85c34be",
+    "process_identity.py": "8f3412fa141fa31811e12801d3a59e971d155cb0027032daec2894931894b526"
+  },
+  "automated_checks": {
+    "executed": 88,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 1,
+    "passed": true,
+    "modules": [
+      "test_offline",
+      "test_server_compatibility",
+      "test_launcher_compat",
+      "test_launcher_profiles",
+      "test_network_launcher",
+      "test_network_lifecycle",
+      "test_network_preflight",
+      "test_network_script_lease",
+      "test_compat_diagnostics"
+    ],
+    "scope": "Synthetic fixtures and read-only launcher references; no actual game launch",
+    "skipped_reason": "Optional private launcher source was not configured."
+  },
+  "microsoft_defender": {
+    "scope": "Custom scan of the complete extracted v1.0.3 release candidate folder; not a whole-PC or Defender Offline scan.",
+    "start": "2026-10-30T00:43:54.1315891+09:00",
+    "end": "2026-10-30T00:44:10.6526542+09:00",
+    "duration_seconds": 16.5210651,
+    "exit_code": 0,
+    "result": "No threats found",
+    "remediation_disabled": true,
+    "per_file_scan_count": null
+  },
+  "privacy_and_archive_review": {
+    "scope": "Static file/code review and archive content verification; no game execution or live network capture",
+    "outer_file_count": 1106,
+    "files_pattern_scanned": 1766,
+    "archive_duplicates": 0,
+    "candidate_content_mismatches": 0,
+    "missing_candidate_files": 0,
+    "private_filename_matches": 0,
+    "unresolved_pattern_hits": 0,
+    "limitations": [
+      "Pattern checks do not recognize every possible secret or encrypted data.",
+      "Base-required deltas are hash-bound and output-path-reviewed, not reconstructed or executed.",
+      "Runtime and native binaries were not proven free of all malicious behavior."
+    ]
+  },
+  "human_gameplay_check": {
+    "environment": "Cloud23333 China update 1.10 / game 11.51, isolated local test folder",
+    "korean_display": "Confirmed by user",
+    "gameplay": "Confirmed by user",
+    "game_exit": "Confirmed by user",
+    "server_and_database_auto_shutdown": "Not confirmed; normal server stop required before installation/removal",
+    "remote_gameplay": "Not verified",
+    "note": "The tested engine sources are identical; the final versioned ZIPs were not separately game-tested."
+  },
+  "virustotal_changed_v103_code": "Not verified. Older reports do not establish results for changed files.",
+  "notice": "These checks are scoped evidence, not a guarantee of safety or absence of personal-data leakage."
+}

@@ -143,7 +143,7 @@ def decode(source):
 
 
 @lru_cache(maxsize=8)
-def compatible(source):
+def _strict_compatible(source):
     text = decode(source)
     nodes = inspect_source(text)
     if any(n['role'] == 'unmanaged_patch_marker' for n in nodes):
@@ -165,6 +165,19 @@ def compatible(source):
     return text, selected
 
 
+@lru_cache(maxsize=8)
+def compatible(source):
+    text = decode(source)
+    nodes = inspect_source(text)
+    if any(n['role'] == 'unmanaged_patch_marker' for n in nodes):
+        raise ValueError('관리 기록 없는 한글 런처 수정이 발견되었습니다. 원본을 복원해 주세요.')
+    # The old anchor contract proves insertion positions only. Every custom
+    # launcher must also prove its complete bounded execution-flow profile.
+    from launcher_profiles import select
+    profile, data = select(text)
+    return text, {'profile': profile, 'analysis': data}
+
+
 def index_from_utf16(text, offset):
     # PowerShell offsets count UTF-16 code units, unlike Python Unicode indexes.
     return len(text.encode('utf-16-le')[:offset*2].decode('utf-16-le'))
@@ -172,6 +185,9 @@ def index_from_utf16(text, offset):
 
 def render(source, descriptor):
     text, nodes = compatible(source)
+    if 'profile' in nodes:
+        from launcher_profiles import legacy_render
+        return legacy_render(source, descriptor, nodes['profile'], nodes['analysis'])
     expected = descriptor['sha256']
     if len(expected) != 64 or any(c not in '0123456789abcdef' for c in expected):
         raise ValueError('한글 모듈 해시 형식이 올바르지 않습니다.')

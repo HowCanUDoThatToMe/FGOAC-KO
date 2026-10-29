@@ -202,27 +202,64 @@ def prepare(target, previous=None):
         launcher_compat.inspect_source(launcher_compat.decode(patched))
     else:
         patched = launcher_compat.render(original, descriptor)
-    record = dict(format=2, path=LAUNCHER, baseline_sha256=BASE_HASHES['FGO_Launcher.ps1'],
+    from network_launcher import render as render_network
+    patched, network = render_network(original, patched)
+    record = dict(format=3, path=LAUNCHER, baseline_sha256=BASE_HASHES['FGO_Launcher.ps1'],
                   original_base64=base64.b64encode(original).decode('ascii'),
                   original_sha256=byte_digest(original),
-                  installed_sha256=byte_digest(patched))
+                  installed_sha256=byte_digest(patched), network=network,
+                  adapter_version=1, verification='static-and-synthetic-only')
+    if byte_digest(original) == BASE_HASHES['FGO_Launcher.ps1']:
+        record['profile'] = 'baseline-exact'
+    else:
+        _, selected = launcher_compat.compatible(original)
+        record['profile'] = selected.get('profile', {}).get('id', 'strict-contract-v1')
     return record, base64.b64encode(patched).decode('ascii')
 
 
 def verify(target, record):
-    if record.get('format') not in (1, 2) or record.get('path') != LAUNCHER:
+    if record.get('format') not in (1, 2, 3) or record.get('path') != LAUNCHER:
         raise ValueError('플랫폼 실행 스크립트 관리 기록이 올바르지 않습니다.')
     original = base64.b64decode(record['original_base64'], validate=True)
     if byte_digest(original) != record['original_sha256']:
         raise ValueError('플랫폼 실행 스크립트 원본 백업이 변경되었습니다.')
     if record['format'] == 1 and record['original_sha256'] != BASE_HASHES['FGO_Launcher.ps1']:
         raise ValueError('이전 플랫폼 실행 스크립트 원본 백업의 버전이 다릅니다.')
-    if record['format'] == 2:
+    if record['format'] in (2, 3):
         if record.get('baseline_sha256') != BASE_HASHES['FGO_Launcher.ps1']:
             raise ValueError('플랫폼 실행 스크립트의 호환성 기준이 다릅니다.')
-        verify_original(original, record['baseline_sha256'])
+        try:
+            verify_original(original, record['baseline_sha256'])
+        except ValueError:
+            if record['format'] != 2:
+                raise
+            # Historical v2 used the narrower anchor contract. Restoring an
+            # unchanged, recorded original does not execute or approve it for
+            # a new install: verify_base still requires the current flow proof.
+            from launcher_compat import _strict_compatible
+            _strict_compatible(original)
     if digest(child(target, LAUNCHER)) != record['installed_sha256']:
         raise ValueError('플랫폼 실행 스크립트가 변경되어 자동 덮어쓰기/제거를 거부합니다.')
+    for rel, sha in network_files(record).items():
+        path = child(target, rel)
+        if not path.is_file() or digest(path) != sha:
+            raise ValueError('[NETWORK:OWNED_FILE_CHANGED] 네트워크 보조 파일 변경: ' + rel)
+
+
+def network_files(record):
+    """Fixed ownership scope; never trust arbitrary paths from installation state."""
+    if not record or record.get('format') in (1, 2):
+        return {}
+    from network_compat import HELPERS
+    network = record.get('network')
+    if not isinstance(network, dict) or network.get('format') != 1:
+        raise ValueError('[NETWORK:STATE_INVALID] 네트워크 관리 기록 누락')
+    files = network.get('files', {})
+    if set(files) != set(HELPERS) or any(
+            not isinstance(sha, str) or len(sha) != 64 or
+            any(c not in '0123456789abcdef' for c in sha) for sha in files.values()):
+        raise ValueError('[NETWORK:STATE_INVALID] 네트워크 관리 파일 범위 오류')
+    return files
 
 
 def verify_base(target, record, expected):

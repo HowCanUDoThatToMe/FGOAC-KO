@@ -12,6 +12,16 @@
 - `platform_launch.py`
 - `process_guard.py`
 - `process_identity.py`
+- `launcher_profiles.py`
+- `launcher_analysis.ps1`
+- `network_compat.py`
+- `network_launcher.py`
+- `network_analysis.ps1`
+- `FGO_KoNetwork.ps1`
+- `FGO_KoServerConfig.py`
+- `FGO_KoServerCleanup.ps1`
+
+v1.0.3에서 추가한 위 런처 분석·네트워크 보조 소스에도 같은 MIT 고지를 적용합니다. 프로파일 JSON은 실행 구조 검사에 사용하는 메타데이터이며 원본 게임 스크립트 전체를 포함하지 않습니다.
 
 MIT 전문은 이 폴더의 `LICENSE`와 배포 ZIP의 `engine/licenses/FGOAC-KO-Installer-MIT.txt`에 있습니다. 배포본과 공개 소스는 파일 해시로 대조할 수 있습니다. 이 코드에는 AI 도구 OpenAI Codex를 사용했습니다.
 

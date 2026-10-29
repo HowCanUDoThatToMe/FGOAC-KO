@@ -146,27 +146,43 @@ def acquire(args):
 
 
 def verify_base(target, doc, cancel=None, previous=None):
+    problems = []
     for i, (rel, sha) in enumerate(doc['base_files'].items(), 1):
         cancelled(cancel)
-        if rel == 'App/FGO_Launcher.ps1':
-            from platform_launch import verify_base as verify_launcher_base
-            verify_launcher_base(target, (previous or {}).get('platform_launcher'), sha)
-        elif file_state(child(target, rel)) != sha:
-            raise ValueError('지원 원본과 다르거나 없는 파일: ' + rel)
+        try:
+            if rel == 'App/FGO_Launcher.ps1':
+                from platform_launch import verify_base as verify_launcher_base
+                verify_launcher_base(target, (previous or {}).get('platform_launcher'), sha)
+            elif file_state(child(target, rel)) != sha:
+                problems.append('[BASE:HASH_MISMATCH] 지원 원본과 다르거나 없는 파일: ' + rel)
+        except ValueError as error:
+            problems.append('[LAUNCHER:INCOMPATIBLE] ' + str(error))
+        except OSError:
+            problems.append('[BASE:READ_FAILED] 파일 읽기 실패: ' + rel)
         if i % 500 == 0 or i == len(doc['base_files']):
             emit('게임 원본 검사 %d/%d' % (i, len(doc['base_files'])))
-    config = read(child(target, CONFIG))
-    if not isinstance(config, dict) or 'gameVersion' not in config:
-        raise ValueError('게임 설정 형식 또는 gameVersion 항목 오류: App/fgo-launcher.json. 정상 설정 백업을 확인해 주세요.')
-    if config.get('gameVersion') != doc['game_version']:
-        raise ValueError('지원 게임 버전 불일치')
+    try:
+        config = read(child(target, CONFIG))
+        if not isinstance(config, dict) or 'gameVersion' not in config:
+            problems.append('[CONFIG:INVALID] 게임 설정 형식 또는 gameVersion 항목 오류: App/fgo-launcher.json.')
+        elif config.get('gameVersion') != doc['game_version']:
+            problems.append('[GAME:VERSION_MISMATCH] 지원 게임 버전 불일치')
+    except (ValueError, OSError):
+        problems.append('[CONFIG:READ_FAILED] App/fgo-launcher.json 읽기/형식 오류')
     server_record = None
     for rel, sha in doc.get('server_base_files', {}).items():
         from platform_launch import SERVER_INDEX, verify_server_base
         if rel != SERVER_INDEX:
             raise ValueError('Unexpected original server compatibility scope')
-        server_record = verify_server_base(target, sha)
-        emit('서버 호환성 검사 통과: ' + server_record['profile'] + ' / ' + server_record['match'])
+        try:
+            server_record = verify_server_base(target, sha)
+            emit('서버 호환성 검사 통과: ' + server_record['profile'] + ' / ' + server_record['match'])
+        except ValueError as error:
+            problems.append('[SERVER:INCOMPATIBLE] ' + str(error))
+    if problems:
+        omitted = '\n추가 문제 %d개' % (len(problems)-20) if len(problems)>20 else ''
+        raise ValueError('설치 전 검사 실패 %d건. 게임 파일은 변경하지 않았습니다.\n%s%s' %
+                         (len(problems), '\n'.join(problems[:20]), omitted))
     return server_record
 
 
@@ -230,7 +246,8 @@ def recover(target, home):
     j = read(jp)
     if j['target'] != str(target.resolve()):
         raise ValueError('Recovery target mismatch')
-    allowed = SERVER_FILES | {STATE, CONFIG, HOME + '/Manage-KoreanPatch.ps1', 'App/FGO_Launcher.ps1'}
+    from network_compat import HELPERS
+    allowed = SERVER_FILES | set(HELPERS) | {STATE, CONFIG, HOME + '/Manage-KoreanPatch.ps1', 'App/FGO_Launcher.ps1'}
     if set(j['before']) != set(j['after']) or not set(j['before']) <= allowed:
         raise ValueError('Recovery ownership scope mismatch')
     if not j['transaction'].startswith('transaction-') or '/' in j['transaction']:
@@ -320,10 +337,29 @@ def install(args, target, home, doc):
     # Synthetic packages without the native bridge retain their existing scope.
     launcher_record = launcher_blob = None
     language_record = routes_blob = None
+    network_blobs = {}
+    network_before = {}
     companions = doc['runtime_companions']
     if 'App/FGO_Launcher.ps1' in doc['base_files']:
+        from network_compat import NATIVE_HOOK_SHA256
+        if doc['base_files'].get('App/fgohook.dll') != NATIVE_HOOK_SHA256:
+            raise ValueError('[NETWORK:NATIVE_ABI_UNVERIFIED] 이 배포본의 네트워크 DLL 조합은 검증되지 않았습니다.')
         from platform_launch import prepare, prepare_language
         launcher_record, launcher_blob = prepare(target, previous)
+        from platform_launch import network_files
+        from network_compat import helper_files
+        old_network = network_files((previous or {}).get('platform_launcher'))
+        for rel, raw in helper_files().items():
+            if rel not in network_files(launcher_record):
+                raise ValueError('[NETWORK:STATE_INVALID] 네트워크 보조 파일 기록 누락')
+            current = file_state(child(target, rel))
+            if current != old_network.get(rel):
+                raise ValueError('[NETWORK:CONFLICT] 기존 네트워크 파일은 덮어쓰지 않습니다: ' + rel)
+            blob = base64.b64encode(raw).decode('ascii')
+            if blob_sha(blob) != network_files(launcher_record)[rel]:
+                raise ValueError('[NETWORK:BUILD_CHANGED] 네트워크 보조 파일 원본 변경')
+            network_blobs[rel] = blob
+            network_before[rel] = current
         language_record, routes_blob, companions = prepare_language(args.cache, doc)
     from platform_launch import BOOTSTRAP, prepare_server_binding, verify_server_unchanged
     bootstrap_blob, companions = prepare_server_binding(args.cache, doc, server_record, companions)
@@ -363,7 +399,7 @@ def install(args, target, home, doc):
     cfg = json.loads(before_config.decode('utf-8-sig'))
     initial_config = previous['original_config_base64'] if previous else base64.b64encode(before_config).decode()
     initial = json.loads(base64.b64decode(initial_config).decode('utf-8-sig'))
-    after = {}
+    after = dict(network_blobs)
     if launcher_record:
         after[launcher_record['path']] = launcher_blob
     for rel in doc['runtime_companions']['files']:
@@ -409,6 +445,9 @@ def install(args, target, home, doc):
         if file_state(child(target, launcher_record['path'])) != expected_launcher:
             raise ValueError('설치 도중 플랫폼 실행 스크립트가 변경되었습니다.')
     verify_server_unchanged(target, server_record)
+    for rel, sha in network_before.items():
+        if file_state(child(target, rel)) != sha:
+            raise ValueError('[NETWORK:RACE] 설치 도중 네트워크 보조 파일이 변경되었습니다: ' + rel)
     # Preserve executable manager before activating anything. Never delete its package dependency.
     source_home = Path(__file__).resolve().parent
     import hashlib
@@ -454,6 +493,8 @@ def uninstall(target, home):
     if state.get('platform_launcher'):
         launcher = state['platform_launcher']
         after[launcher['path']] = launcher['original_base64']
+        from platform_launch import network_files
+        after.update({rel: None for rel in network_files(launcher)})
     tx = home / ('transaction-' + uuid.uuid4().hex); tx.mkdir()
     staging = tx / 'staging'; staging.mkdir()
     commit_transaction(target, home, staging, None, after, state['files'], None, 'uninstall')
