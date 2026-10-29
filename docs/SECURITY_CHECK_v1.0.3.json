@@ -4,8 +4,8 @@
   "assets": [
     {
       "name": "FGOAC-Korean-Offline-v1.0.3-1of2.zip",
-      "sha256": "13f1421f6c00bfe90a9c98831629739afb0bd8de70e2c894e530ee614e9f8697",
-      "size": 1958821693
+      "sha256": "68a36d1bc137247b577eb7beeaf3ffc46568fcfa59af79a1601ff4890010facf",
+      "size": 1958822594
     },
     {
       "name": "FGOAC-Korean-Offline-v1.0.3-2of2.zip",
@@ -14,7 +14,11 @@
     }
   ],
   "translation_release_sha256": "ea92a2cd07d4e8064403c83376f75c666896881b46ab007f51749d98b60eb406",
-  "tested_engine_sources_unchanged": true,
+  "tested_engine_sources_unchanged": false,
+  "tested_execution_logic_unchanged": true,
+  "post_test_changes": [
+    "offline_ui.py: greeting text only; release documentation and metadata"
+  ],
   "public_installer_source_sha256": {
     "FGO_KoNetwork.ps1": "51466e1eee893cae04ff88e2d955c4b5b65ec0ecb9d97b067aeafb9bbfe737af",
     "FGO_KoServerCleanup.ps1": "e209eeb1b2a2b0909688c900eb346e1fa76e638c47ee95111196728cc149121b",
@@ -33,7 +37,7 @@
     "network_launcher.py": "d9e7f8e5e30cb489f8bf9ddce90aa8a1bcf47e652ecb9274961fbcc3810e4dd4",
     "offline_config.py": "d155b6991354704d8d6bbf00c8fd5014610a8779f2558d8fa7a4f9872aaf78d1",
     "offline_support.py": "21a99ea2655117e9d93859e965585276b7fdef497071b15bdc70e874c82c1cf2",
-    "offline_ui.py": "ac174a07a17de0dcdc23544dbd4be52b3b31bd4458c79af75f2582e285718752",
+    "offline_ui.py": "28aa158ce94005040be762bc5f11539c81ccb81f80b129f4f64f95352b4bc106",
     "platform_launch.py": "5331025880180c606ed706ab9d3e8760447513eef5803741560ff65c475bf2cb",
     "process_guard.py": "94859237c3a309ca73a869dc9cc833d0397e9fb930f954097c2b6ac6a85c34be",
     "process_identity.py": "8f3412fa141fa31811e12801d3a59e971d155cb0027032daec2894931894b526"
@@ -56,13 +60,14 @@
       "test_compat_diagnostics"
     ],
     "scope": "Synthetic fixtures and read-only launcher references; no actual game launch",
+    "reuse_note": "88 checks ran before the final installer greeting and documentation edits. The build verified unchanged execution logic; the UI source was compiled. The full suite was not rerun for text-only edits.",
     "skipped_reason": "Optional private launcher source was not configured."
   },
   "microsoft_defender": {
     "scope": "Custom scan of the complete extracted v1.0.3 release candidate folder; not a whole-PC or Defender Offline scan.",
-    "start": "2026-10-30T00:43:54.1315891+09:00",
-    "end": "2026-10-30T00:44:10.6526542+09:00",
-    "duration_seconds": 16.5210651,
+    "start": "2026-10-30T01:09:08.0365504+09:00",
+    "end": "2026-10-30T01:09:23.9620471+09:00",
+    "duration_seconds": 15.9254967,
     "exit_code": 0,
     "result": "No threats found",
     "remediation_disabled": true,
@@ -90,7 +95,7 @@
     "game_exit": "Confirmed by user",
     "server_and_database_auto_shutdown": "Not confirmed; normal server stop required before installation/removal",
     "remote_gameplay": "Not verified",
-    "note": "The tested engine sources are identical; the final versioned ZIPs were not separately game-tested."
+    "note": "Tested execution logic is unchanged. Only the installer greeting, release documentation and metadata changed afterward. Final versioned ZIPs were not separately game-tested."
   },
   "virustotal_changed_v103_code": "Not verified. Older reports do not establish results for changed files.",
   "notice": "These checks are scoped evidence, not a guarantee of safety or absence of personal-data leakage."
