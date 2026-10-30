@@ -20,6 +20,8 @@
 - `FGO_KoNetwork.ps1`
 - `FGO_KoServerConfig.py`
 - `FGO_KoServerCleanup.ps1`
+- `runtime_variants.py`
+- `first_start_compat.py`
 
 v1.0.3에서 추가한 위 런처 분석·네트워크 보조 소스에도 같은 MIT 고지를 적용합니다. 프로파일 JSON은 실행 구조 검사에 사용하는 메타데이터이며 원본 게임 스크립트 전체를 포함하지 않습니다.
 
@@ -34,3 +36,5 @@ MIT는 위 코드의 상업적 이용·수정·재배포·판매도 허용합니
 이 폴더는 공개 검토용 소스입니다. 게임 데이터와 실행 환경을 포함한 독립 실행 패키지가 아니므로, 일반 이용자는 GitHub Releases의 설치 ZIP을 사용하세요.
 
 참고: [MIT 공식 전문](https://opensource.org/license/mit), [GitHub 라이선스 안내](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/licensing-a-repository).
+
+ v2.0.0에서 추가한 배포 계열 선택·최초 설정 보완 소스에도 같은 MIT 고지를 적용합니다.

@@ -60,7 +60,7 @@ def select(text):
 def legacy_render(source, descriptor, profile, data):
     from launcher_compat import decode, index_from_utf16, inspect_source
     text = decode(source)
-    if profile['id'] not in ('chinese-psi-v1', 'chinese-psi-physical-v1', 'multilingual-psi-v1'):
+    if profile['id'] not in ('chinese-psi-v1', 'chinese-psi-physical-v1', 'multilingual-psi-v1', 'three-colors-psi-v1'):
         raise ValueError('Unsupported adapter')
     if any(word in text.lower() for word in ('$fgokoenabled', '$fgokolanguage')):
         raise ValueError('[LAUNCHER:CONFLICT] 프로젝트 변수 이름 충돌')

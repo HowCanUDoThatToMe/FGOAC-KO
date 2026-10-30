@@ -1,0 +1,87 @@
+{
+  "checked_date_kst": "2026-10-31",
+  "files": [
+    {
+      "change": "changed",
+      "path": "engine/engine.py",
+      "report_url": "https://www.virustotal.com/gui/file/013b0129f87a4e7dbb7c8cdf65313e54c01acf171ebb06683f76af129b70263b",
+      "result_independently_verified": false,
+      "sha256": "013b0129f87a4e7dbb7c8cdf65313e54c01acf171ebb06683f76af129b70263b",
+      "size": 33437,
+      "user_reported_check_completed": true
+    },
+    {
+      "change": "new",
+      "displayed_denominator": 62,
+      "evidence": "Visible VirusTotal detection report; SHA-256 and filename match candidate",
+      "last_analysis_kst": "2026-10-31 00:56:54",
+      "malicious": 0,
+      "path": "engine/first_start_compat.py",
+      "report_url": "https://www.virustotal.com/gui/file/dc3a221f868cf1642782054b6f459df05b91dbe5871a150437d09426459bd27f",
+      "result_independently_verified": true,
+      "sha256": "dc3a221f868cf1642782054b6f459df05b91dbe5871a150437d09426459bd27f",
+      "size": 9793,
+      "type_unsupported": 13,
+      "undetected": 62,
+      "user_reported_check_completed": true
+    },
+    {
+      "change": "changed",
+      "path": "engine/launcher_profiles.py",
+      "report_url": "https://www.virustotal.com/gui/file/37aef82aaa66cc439824c8d38c5c81d0df3f9ae5577f39d8d0a5de049aed6e9a",
+      "result_independently_verified": false,
+      "sha256": "37aef82aaa66cc439824c8d38c5c81d0df3f9ae5577f39d8d0a5de049aed6e9a",
+      "size": 6379,
+      "user_reported_check_completed": true
+    },
+    {
+      "change": "changed",
+      "path": "engine/offline_config.py",
+      "report_url": "https://www.virustotal.com/gui/file/16b8be8a027f7ea37a7dadab6189ac2832e91974700b1570b9022e27c0902dce",
+      "result_independently_verified": false,
+      "sha256": "16b8be8a027f7ea37a7dadab6189ac2832e91974700b1570b9022e27c0902dce",
+      "size": 123,
+      "user_reported_check_completed": true
+    },
+    {
+      "change": "changed",
+      "path": "engine/offline_ui.py",
+      "report_url": "https://www.virustotal.com/gui/file/4ca942fbcf9690161a01f485c1980682db2e41c246089efa1acf1f74c72877b7",
+      "result_independently_verified": false,
+      "sha256": "4ca942fbcf9690161a01f485c1980682db2e41c246089efa1acf1f74c72877b7",
+      "size": 7272,
+      "user_reported_check_completed": true
+    },
+    {
+      "change": "changed",
+      "path": "engine/platform_launch.py",
+      "report_url": "https://www.virustotal.com/gui/file/242bc4b8ef212e084fa58f193e49d7aaf656d55ddb8a5b6358a93f37c7676e4b",
+      "result_independently_verified": false,
+      "sha256": "242bc4b8ef212e084fa58f193e49d7aaf656d55ddb8a5b6358a93f37c7676e4b",
+      "size": 14737,
+      "user_reported_check_completed": true
+    },
+    {
+      "change": "changed",
+      "path": "engine/process_guard.py",
+      "report_url": "https://www.virustotal.com/gui/file/be6732a05be846381ec23e39bd854078a821bbf12a358f3fe8f1a4a24178090c",
+      "result_independently_verified": false,
+      "sha256": "be6732a05be846381ec23e39bd854078a821bbf12a358f3fe8f1a4a24178090c",
+      "size": 25787,
+      "user_reported_check_completed": true
+    },
+    {
+      "change": "new",
+      "path": "engine/runtime_variants.py",
+      "report_url": "https://www.virustotal.com/gui/file/e78458922c97704266d1c43d78ee9bf20f473eb009a0faeb68cb0cc5a0e4a2f1",
+      "result_independently_verified": false,
+      "sha256": "e78458922c97704266d1c43d78ee9bf20f473eb009a0faeb68cb0cc5a0e4a2f1",
+      "size": 2232,
+      "user_reported_check_completed": true
+    }
+  ],
+  "package_unchanged_after_user_scan": true,
+  "scope": "Changed/new code files. One result independently read; remaining detection counts not independently confirmed. No whole-distribution or new Defender claim.",
+  "user_statement": "virustotal 했으니까 계속 업로드해",
+  "version": "2.0.0"
+}

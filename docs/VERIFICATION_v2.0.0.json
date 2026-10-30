@@ -1,0 +1,132 @@
+{
+  "antivirus_status": "User completed VirusTotal checks on 2026-10-31; see separate hash-specific results. No new Defender result.",
+  "promotion": {
+    "archives": [
+      {
+        "name": "FGOAC-Korean-Offline-v2.0.0-1of2.zip",
+        "sha256": "734404e971db3795acd696fae75fcaa2921eca5045b857c709c91c6d84963f59",
+        "size": 1959361158
+      },
+      {
+        "name": "FGOAC-Korean-Offline-v2.0.0-2of2.zip",
+        "sha256": "96ed963b6d084475211e64a3b0cd98407a5534ba222254c368e455e2b2d80c39",
+        "size": 2143696274
+      }
+    ],
+    "candidate_files": 1109,
+    "changed_files": [
+      "INSTALL_KO.txt",
+      "RELEASE_NOTES_KO.md",
+      "SHA256SUMS.txt",
+      "engine/licenses/INSTALLER_LICENSE_SCOPE_KO.md",
+      "engine/licenses/SECURITY_SCOPE_KO.md",
+      "engine/offline_config.py",
+      "offline-manifest.json"
+    ],
+    "game_applied": false,
+    "human_gameplay_confirmation": "2026-10-31 on source candidate v1.0.4; not a separate v2.0.0 gameplay run",
+    "new_antivirus_scan": false,
+    "omitted_inactive_or_replaced_manifests": [
+      "release-v1.0.2.json",
+      "release-v1.0.4.json"
+    ],
+    "privacy_pattern_files_checked": 42,
+    "privacy_pattern_findings": [],
+    "privacy_pattern_scope": "Bounded text scan, not a proof of absence of personal information",
+    "release_sha256": "8b5262050b9898ec6e200ac3d16edfabec6281a3c3c51f3d92e58ace2a995080",
+    "runtime_logic_and_payload_unchanged": true,
+    "source_release_sha256": "256823322527c7eda261c3f9755df6ca42c42c8910aeeed3d3c4040ee11569b1",
+    "source_unchanged": true,
+    "source_version": "1.0.4",
+    "translation_version": "1.0.2",
+    "uploaded": false,
+    "version": "2.0.0",
+    "zip_union_matches": true
+  },
+  "published": false,
+  "version_checks": {
+    "bundle_acquire_reused": true,
+    "candidate_engine_sha256": "013b0129f87a4e7dbb7c8cdf65313e54c01acf171ebb06683f76af129b70263b",
+    "errors": 0,
+    "failures": 0,
+    "fixture_scope": "Synthetic previous installed versions using the promoted engine; not real game migration",
+    "passed": true,
+    "real_bundle_acquire": true,
+    "real_game_applied": false,
+    "runtime_family_versions": [
+      "2.0.0",
+      "2.0.0"
+    ],
+    "scenarios": [
+      "test_fresh_200",
+      "test_103_to_200",
+      "test_104_to_200",
+      "test_installer_version_preserves_frozen_translation_identity"
+    ],
+    "tests_run": 4,
+    "uploaded": false,
+    "version": "2.0.0"
+  },
+  "virustotal_followup": "VIRUSTOTAL_v2.0.0_20261031.json",
+  "virustotal_scan_candidates": {
+    "archive": {
+      "name": "FGOAC-v2.0.0-changed-code.zip",
+      "sha256": "269b156ac05c9db1a65226577c5e54c008eb3739ec5dab6da0f95f0765cac979",
+      "size": 32985
+    },
+    "baseline": "1.0.3",
+    "files": [
+      {
+        "change": "changed",
+        "path": "engine/engine.py",
+        "sha256": "013b0129f87a4e7dbb7c8cdf65313e54c01acf171ebb06683f76af129b70263b",
+        "size": 33437
+      },
+      {
+        "change": "new",
+        "path": "engine/first_start_compat.py",
+        "sha256": "dc3a221f868cf1642782054b6f459df05b91dbe5871a150437d09426459bd27f",
+        "size": 9793
+      },
+      {
+        "change": "changed",
+        "path": "engine/launcher_profiles.py",
+        "sha256": "37aef82aaa66cc439824c8d38c5c81d0df3f9ae5577f39d8d0a5de049aed6e9a",
+        "size": 6379
+      },
+      {
+        "change": "changed",
+        "path": "engine/offline_config.py",
+        "sha256": "16b8be8a027f7ea37a7dadab6189ac2832e91974700b1570b9022e27c0902dce",
+        "size": 123
+      },
+      {
+        "change": "changed",
+        "path": "engine/offline_ui.py",
+        "sha256": "4ca942fbcf9690161a01f485c1980682db2e41c246089efa1acf1f74c72877b7",
+        "size": 7272
+      },
+      {
+        "change": "changed",
+        "path": "engine/platform_launch.py",
+        "sha256": "242bc4b8ef212e084fa58f193e49d7aaf656d55ddb8a5b6358a93f37c7676e4b",
+        "size": 14737
+      },
+      {
+        "change": "changed",
+        "path": "engine/process_guard.py",
+        "sha256": "be6732a05be846381ec23e39bd854078a821bbf12a358f3fe8f1a4a24178090c",
+        "size": 25787
+      },
+      {
+        "change": "new",
+        "path": "engine/runtime_variants.py",
+        "sha256": "e78458922c97704266d1c43d78ee9bf20f473eb009a0faeb68cb0cc5a0e4a2f1",
+        "size": 2232
+      }
+    ],
+    "scan_performed": false,
+    "uploaded": false,
+    "version": "2.0.0"
+  }
+}

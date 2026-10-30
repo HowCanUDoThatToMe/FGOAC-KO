@@ -135,7 +135,7 @@ def refuse_running(target, *, launching=False):
         if row['ProcessId'] in owned_observers: continue
         name = row.get('ExecutablePath')
         command = row.get('CommandLine')
-        relevant = row['Name'].lower() in {'ago.exe','amdaemon.exe','fgolocalplatform.exe',
+        relevant = row['Name'].lower() in {'ago.exe','amdaemon.exe','fgolocalplatform.exe','fgo-dualsoul.exe',
             'fgoac scooby.exe','python.exe','pythonw.exe','powershell.exe','pwsh.exe'}
         if relevant and (not name or command is None):
             from process_identity import limited_identity
@@ -153,7 +153,7 @@ def refuse_running(target, *, launching=False):
             # Only this launch check permits the platform and its server stack.
             # Mutation operations continue using the strict default policy.
             image = str(name or '').replace('/', '\\').lower()
-            platform = image in {target_name + '\\fgolocalplatform.exe', target_name + '\\fgoac scooby.exe'}
+            platform = image in {target_name + '\\fgolocalplatform.exe', target_name + '\\fgoac scooby.exe', target_name + '\\fgo-dualsoul.exe'}
             server_image = image.startswith(target_name + '\\server\\') and row['Name'].lower() in {
                 'python.exe', 'pythonw.exe', 'mariadbd.exe', 'mysqld.exe'}
             game_command = bool(re.search(r'(?:fgo_launcher[.]ps1|fgo_runpowershell[.]cmd|[.]ko-fgoac-launch-[^\\\s"]+[.]ps1)', normalized_command))

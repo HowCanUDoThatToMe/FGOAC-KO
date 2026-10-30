@@ -125,7 +125,11 @@ def validate_release(doc):
 def acquire(args):
     package = local_path(args.package)
     release = verify_bundle(package, args.cancel)
-    doc = read(release); validate_release(doc)
+    source_doc = read(release)
+    from runtime_variants import documents, select
+    for variant in documents(source_doc):
+        validate_release(variant)
+    doc = select(source_doc, Path(args.target) if getattr(args, 'target', None) else None)
     args.cache = child(package, 'payload')
     args.release_sha = digest(release)
     # Keep the frozen translation payload identity separate from installer releases.
@@ -193,7 +197,9 @@ def reconstruct(target, staging, cache, doc, cancel=None):
         if digest(archive_path) != asset['sha256']:
             raise ValueError('Cached asset changed')
         with zipfile.ZipFile(archive_path) as archive:
-            if len(archive.infolist()) != len(rows) or set(archive.namelist()) != {r['entry'] for r in rows}:
+            expected_entries = doc.get('archive_entries', {}).get(asset['name'], {r['entry']:r['size'] for r in rows})
+            if (len(archive.infolist()) != len(expected_entries) or set(archive.namelist()) != set(expected_entries) or
+                    any(i.file_size != expected_entries[i.filename] for i in archive.infolist())):
                 raise ValueError('Archive entry scope mismatch')
             for r in rows:
                 cancelled(cancel)
@@ -247,7 +253,8 @@ def recover(target, home):
     if j['target'] != str(target.resolve()):
         raise ValueError('Recovery target mismatch')
     from network_compat import HELPERS
-    allowed = SERVER_FILES | set(HELPERS) | {STATE, CONFIG, HOME + '/Manage-KoreanPatch.ps1', 'App/FGO_Launcher.ps1'}
+    allowed = SERVER_FILES | set(HELPERS) | {STATE, CONFIG, HOME + '/Manage-KoreanPatch.ps1', 'App/FGO_Launcher.ps1',
+                                          'App/deck.json', 'Server/state/fgo-players.json'}
     if set(j['before']) != set(j['after']) or not set(j['before']) <= allowed:
         raise ValueError('Recovery ownership scope mismatch')
     if not j['transaction'].startswith('transaction-') or '/' in j['transaction']:
@@ -282,10 +289,17 @@ def recover(target, home):
     emit('중단된 설치를 이전 상태로 복구했습니다.')
 
 
-def commit_transaction(target, home, staging, state, after, before_overlay, after_overlay, action, retain_overlay=False):
+def commit_transaction(target, home, staging, state, after, before_overlay, after_overlay, action, retain_overlay=False, first_start_plan=None):
     if retain_overlay and (before_overlay is None or before_overlay != after_overlay):
         raise ValueError('Cannot retain a changed overlay')
     tx = staging.parent
+    repairs = {}
+    if first_start_plan:
+        from first_start_compat import verify
+        verify(target, first_start_plan)
+        repairs = {r['path']:r for r in first_start_plan['changes']}
+        if any(after.get(rel) != r['after_base64'] for rel, r in repairs.items()):
+            raise ValueError('First-start transaction plan mismatch')
     touched = set(after) | {STATE}
     after[STATE] = base64.b64encode(encoded(state)).decode() if state else None
     j = dict(target=str(target.resolve()), transaction=tx.name,
@@ -300,7 +314,27 @@ def commit_transaction(target, home, staging, state, after, before_overlay, afte
             overlay.parent.mkdir(parents=True, exist_ok=True)
             child(staging, OVERLAY).rename(overlay)
         for rel, blob in after.items():
-            replace_optional(child(target, rel), blob)
+            path = child(target, rel)
+            if rel in repairs:
+                row = repairs[rel]
+                if file_state(path) != row['before_sha256']:
+                    raise ValueError('설치 도중 초기 설정이 변경되었습니다: ' + rel)
+                if row['before_base64'] is None:
+                    # Windows rename refuses an existing destination. Stage the
+                    # complete empty store before atomically creating its name.
+                    if os.name != 'nt':
+                        raise ValueError('First-start creation requires Windows')
+                    temp = path.with_name(path.name + '.tmp-' + uuid.uuid4().hex)
+                    put(temp, base64.b64decode(blob))
+                    try:
+                        temp.rename(path)
+                    finally:
+                        if temp.exists():
+                            temp.unlink()
+                else:
+                    replace_optional(path, blob)
+            else:
+                replace_optional(path, blob)
         if state:
             verify_owned(target, state)
         elif overlay.exists():
@@ -340,16 +374,26 @@ def install(args, target, home, doc):
     network_blobs = {}
     network_before = {}
     companions = doc['runtime_companions']
+    first_start_plan = None
+    if doc.get('runtime_family') == 'three-colors-psi-v1':
+        from first_start_compat import prepare as prepare_first_start
+        first_start_plan = prepare_first_start(target)
     if 'App/FGO_Launcher.ps1' in doc['base_files']:
         from network_compat import NATIVE_HOOK_SHA256
-        if doc['base_files'].get('App/fgohook.dll') != NATIVE_HOOK_SHA256:
+        modern = doc.get('runtime_family') == 'three-colors-psi-v1'
+        if not modern and doc['base_files'].get('App/fgohook.dll') != NATIVE_HOOK_SHA256:
             raise ValueError('[NETWORK:NATIVE_ABI_UNVERIFIED] 이 배포본의 네트워크 DLL 조합은 검증되지 않았습니다.')
         from platform_launch import prepare, prepare_language
         launcher_record, launcher_blob = prepare(target, previous)
+        if modern != (launcher_record['profile'] == 'three-colors-psi-v1'):
+            raise ValueError('게임 모듈과 런처의 배포 계열이 일치하지 않습니다.')
         from platform_launch import network_files
         from network_compat import helper_files
         old_network = network_files((previous or {}).get('platform_launcher'))
-        for rel, raw in helper_files().items():
+        helpers = {} if modern else helper_files()
+        if modern and old_network:
+            raise ValueError('기존 네트워크 패치를 제거한 뒤 Three Colors에 설치해 주세요.')
+        for rel, raw in helpers.items():
             if rel not in network_files(launcher_record):
                 raise ValueError('[NETWORK:STATE_INVALID] 네트워크 보조 파일 기록 누락')
             current = file_state(child(target, rel))
@@ -383,7 +427,8 @@ def install(args, target, home, doc):
         if (same_release and previous.get('version') == doc['version'] and
                 previous.get('platform_launcher') == launcher_record and
                 previous.get('platform_language') == language_record and
-                previous.get('server_compatibility') == server_record):
+                previous.get('server_compatibility') == server_record and
+                not (first_start_plan or {}).get('changes')):
             verify_server_unchanged(target, server_record)
             emit('이미 같은 승인본이 설치되어 있습니다. 파일 검사 통과.'); return
     elif child(target, OVERLAY).exists():
@@ -400,6 +445,8 @@ def install(args, target, home, doc):
     initial_config = previous['original_config_base64'] if previous else base64.b64encode(before_config).decode()
     initial = json.loads(base64.b64decode(initial_config).decode('utf-8-sig'))
     after = dict(network_blobs)
+    for repair in (first_start_plan or {}).get('changes', []):
+        after[repair['path']] = repair['after_base64']
     if launcher_record:
         after[launcher_record['path']] = launcher_blob
     for rel in doc['runtime_companions']['files']:
@@ -427,6 +474,8 @@ def install(args, target, home, doc):
         state['platform_language'] = language_record
     if server_record:
         state['server_compatibility'] = server_record
+    if doc.get('runtime_family'):
+        state['runtime_family'] = doc['runtime_family']
     if doc.get('integrated_addons'):
         state['integrated_addons'] = doc['integrated_addons']
     cancelled(args.cancel)
@@ -468,7 +517,10 @@ exit $LASTEXITCODE
     after[HOME + '/Manage-KoreanPatch.ps1'] = base64.b64encode(management.encode('utf-8-sig')).decode()
     save(home / 'release.json', doc)
     commit_transaction(target, home, staging, state, after, previous['files'] if previous else None,
-                       files, 'upgrade' if previous else 'install', retain_overlay=retain_overlay)
+                       files, 'upgrade' if previous else 'install', retain_overlay=retain_overlay,
+                       first_start_plan=first_start_plan)
+    for repair in (first_start_plan or {}).get('changes', []):
+        emit('최초 실행 설정 보완: ' + repair['path'])
     emit('설치 완료: %s / %d개 파일. 실제 게임 화면 검수와는 별도입니다.' % (doc['version'], len(files)))
 
 

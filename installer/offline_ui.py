@@ -43,7 +43,7 @@ class Installer:
         self.progress.pack(fill='x', pady=12)
         self.output = scrolledtext.ScrolledText(frame, height=15, state='disabled', font=('맑은 고딕', 10))
         self.output.pack(fill='both', expand=True)
-        self.write('전체 자료를 내려받은 뒤 사용할 수 있는 오프라인 설치기입니다.\nStart-KoreanPatch.cmd를 관리자 권한으로 실행하세요.\n설치 후에는 이 창의 [한글 게임 실행]을 사용하세요. 플랫폼의 [서버 시작]을 먼저 누르지 마세요.\n설치·업데이트·제거 전에는 플랫폼·게임·서버를 모두 종료하세요.\n설치 자체는 게임을 자동 실행하지 않습니다.\n')
+        self.write('전체 자료를 내려받은 뒤 사용할 수 있는 오프라인 설치기입니다.\nStart-KoreanPatch.cmd를 관리자 권한으로 실행하세요.\n기존 update 1.10은 설치 후 이 창의 [한글 게임 실행]을 사용하세요. 플랫폼의 [서버 시작]을 먼저 누르지 마세요.\nThree Colors는 설치 후 해당 플랫폼의 기존 서버·게임 실행 순서를 사용하세요.\n설치·업데이트·제거 전에는 플랫폼·게임·서버를 모두 종료하세요.\n설치 자체는 게임을 자동 실행하지 않습니다.\n')
         root.protocol('WM_DELETE_WINDOW', self.close)
         root.after(100, self.poll)
 

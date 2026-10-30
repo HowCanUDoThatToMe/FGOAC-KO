@@ -202,9 +202,16 @@ def prepare(target, previous=None):
         launcher_compat.inspect_source(launcher_compat.decode(patched))
     else:
         patched = launcher_compat.render(original, descriptor)
-    from network_launcher import render as render_network
-    patched, network = render_network(original, patched)
-    record = dict(format=3, path=LAUNCHER, baseline_sha256=BASE_HASHES['FGO_Launcher.ps1'],
+    modern = False
+    if byte_digest(original) != BASE_HASHES['FGO_Launcher.ps1']:
+        _, selected = launcher_compat.compatible(original)
+        modern = selected['profile']['id'] == 'three-colors-psi-v1'
+    if modern:
+        network = dict(format=1, policy='upstream-three-colors', files={})
+    else:
+        from network_launcher import render as render_network
+        patched, network = render_network(original, patched)
+    record = dict(format=4 if modern else 3, path=LAUNCHER, baseline_sha256=BASE_HASHES['FGO_Launcher.ps1'],
                   original_base64=base64.b64encode(original).decode('ascii'),
                   original_sha256=byte_digest(original),
                   installed_sha256=byte_digest(patched), network=network,
@@ -218,14 +225,14 @@ def prepare(target, previous=None):
 
 
 def verify(target, record):
-    if record.get('format') not in (1, 2, 3) or record.get('path') != LAUNCHER:
+    if record.get('format') not in (1, 2, 3, 4) or record.get('path') != LAUNCHER:
         raise ValueError('플랫폼 실행 스크립트 관리 기록이 올바르지 않습니다.')
     original = base64.b64decode(record['original_base64'], validate=True)
     if byte_digest(original) != record['original_sha256']:
         raise ValueError('플랫폼 실행 스크립트 원본 백업이 변경되었습니다.')
     if record['format'] == 1 and record['original_sha256'] != BASE_HASHES['FGO_Launcher.ps1']:
         raise ValueError('이전 플랫폼 실행 스크립트 원본 백업의 버전이 다릅니다.')
-    if record['format'] in (2, 3):
+    if record['format'] in (2, 3, 4):
         if record.get('baseline_sha256') != BASE_HASHES['FGO_Launcher.ps1']:
             raise ValueError('플랫폼 실행 스크립트의 호환성 기준이 다릅니다.')
         try:
@@ -249,6 +256,11 @@ def verify(target, record):
 def network_files(record):
     """Fixed ownership scope; never trust arbitrary paths from installation state."""
     if not record or record.get('format') in (1, 2):
+        return {}
+    if record.get('format') == 4:
+        if (record.get('profile') != 'three-colors-psi-v1' or
+                record.get('network') != dict(format=1, policy='upstream-three-colors', files={})):
+            raise ValueError('[NETWORK:STATE_INVALID] Three Colors 네트워크 보존 기록 오류')
         return {}
     from network_compat import HELPERS
     network = record.get('network')
