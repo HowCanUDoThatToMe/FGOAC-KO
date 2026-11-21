@@ -130,6 +130,23 @@ Fate/Grand Order Arcade의 텍스트와 화면 속 글자를 한국어로 옮기
 
 이전 다운로드형 `FGOAC-Korean-Setup.exe`는 2026-10-25에 7/68 탐지가 보고됐으며 원인은 확정되지 않았습니다. 해당 파일은 새 묶음에서 제외합니다. 다른 파일의 과거 0/57 결과나 다른 프로젝트 사례는 새 묶음 전체의 안전성을 증명하지 않습니다. 파일 해시 확인도 악성코드 검사나 제작자 인증을 대신하지 않습니다.
 
+### v2.1.0 VirusTotal 검사 결과
+
+2026년 11월 21일, v2.1.0 공개 ZIP에서 꺼낸 자막 실행 파일 2개(EXE·DLL)와 Python 스크립트 6개를 개별 검사했습니다. **8개 파일 모두 악성·의심 탐지 0건**이었으며, 각 보고서의 SHA-256이 배포 파일과 일치했습니다.
+
+| 파일별 VirusTotal 보고서 | 악성 | 의심 | 미탐지 | 형식 미지원 | 검사 실패 |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| [mash-subtitles-host.exe](https://www.virustotal.com/gui/file/cba9f53ef9b151ae49705ce0adba748fe8c39509725d16d49facb1035cbd2a6f) | 0 | 0 | 71 | 3 | 0 |
+| [mash-subtitles-trial.dll](https://www.virustotal.com/gui/file/b98189c1742da7f42c4b639a0dd533990e0356d6a36afdea391948b914e6f736) | 0 | 0 | 71 | 3 | 0 |
+| [engine.py](https://www.virustotal.com/gui/file/52189607f2db313ef3d614e9a660890c39ab6892e4e3ef62f830a8b9897fba89) | 0 | 0 | 62 | 12 | 0 |
+| [release210_support.py](https://www.virustotal.com/gui/file/13129ec20e6356e97c638e02b0bfab5d89863d62d345ed4a80f67b2bc244b061) | 0 | 0 | 61 | 13 | 0 |
+| [fgo_ko_text_bootstrap.py](https://www.virustotal.com/gui/file/2857211e4f70ac30a3b81414621eb352d39f4ec02d253759e42b60529915df18) | 0 | 0 | 61 | 13 | 0 |
+| [launcher_profiles.py](https://www.virustotal.com/gui/file/48af937d38bdaf40bcdd4a16e7fe8f56bedb5693ecc12a70e0c3d79a6dc94839) | 0 | 0 | 61 | 12 | 1 |
+| [runtime_variants.py](https://www.virustotal.com/gui/file/ddbef698f177a60137d420efadc355308aefae031d7767c31aa69d20786b5dee) | 0 | 0 | 61 | 12 | 1 |
+| [offline_config.py](https://www.virustotal.com/gui/file/46ed4d7fb679705ac269a9676c3cc6103b3f69d41a80c12e2856468377a59ae2) | 0 | 0 | 60 | 14 | 0 |
+
+수치는 검사 당시의 엔진 수입니다. 검사 범위는 표에 있는 파일 8개로 한정됩니다.
+
 ### v2.0.0의 확인 상태
 
 Three Colors 검수 후보 v1.0.4에서 자동 회귀 검사 **83개 통과·2개 건너뜀·실패 0건**, 실제 파일을 이용한 격리 시험에서 설치·상태 확인·재설치·제거·상태 확인을 통과했습니다. 적용 파일 4,365개와 변경하지 않는 입력 6,306개의 일치를 확인했고, **2026-10-31 사용자가 실제 실행 정상을 확인**했습니다.
