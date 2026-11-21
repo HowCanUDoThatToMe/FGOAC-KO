@@ -33,7 +33,7 @@ MIT는 위 코드의 상업적 이용·수정·재배포·판매도 허용합니
 
 원작 콘텐츠에 대한 새 이용허락을 부여하지 않으며, 외부 코드의 기존 저작권·MIT·OFL·Python 등의 고지는 그대로 유지합니다. 구성품별 내용은 저장소의 `docs/THIRD_PARTY_NOTICES_KO.md`와 배포 ZIP의 `engine/licenses`를 확인하세요.
 
-이 폴더는 공개 검토용 소스입니다. 게임 데이터와 실행 환경을 포함한 독립 실행 패키지가 아니므로, 일반 이용자는 GitHub Releases의 설치 ZIP을 사용하세요.
+이 폴더의 설치기 코드는 [v2.0.0 공개 소스](https://github.com/HowCanUDoThatToMe/FGOAC-KO/tree/v2.0.0/installer) 기준입니다. v2.1.0에서 실제 사용되는 코드는 [v2.1.0 설치 ZIP](https://github.com/HowCanUDoThatToMe/FGOAC-KO/releases/tag/v2.1.0)의 `engine/`에서 확인하세요. 배포 ZIP의 MIT 적용 목록은 `engine/licenses/INSTALLER_LICENSE_SCOPE_KO.md`에 있습니다.
 
 참고: [MIT 공식 전문](https://opensource.org/license/mit), [GitHub 라이선스 안내](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/licensing-a-repository).
 

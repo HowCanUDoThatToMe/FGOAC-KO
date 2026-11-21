@@ -1,6 +1,6 @@
 # 크레딧·제3자 고지
 
-> 2026-10-26 오프라인 r004 기준. 기존 r002 구성품의 고지를 유지하고 자체 설치기 코드의 MIT 적용 범위를 추가했다. 이 요약은 각 라이선스의 전문을 대신하지 않는다. 언급된 제작자는 이 패치를 승인하거나 보증한 것으로 표시하지 않는다.
+> v2.1.0의 구성품별 고지는 설치 ZIP의 `engine/licenses/`에 있습니다. 마이룸 자막용 글꼴 고지는 설치한 한국어 리소스의 `native/myroom-trial/OFL.txt`에 있습니다.
 
 ## 공통 고지 문안
 
@@ -20,13 +20,15 @@ Codex와 기타 도구의 언급은 도구 제공사의 공식 참여·승인·�
 
 ## 도구와 구성요소
 
-**자체 설치기 코드** — [명시한 9개 소스 파일](../installer/LICENSE_SCOPE.md)에 [MIT License](../installer/LICENSE)를 적용합니다. `Copyright (c) 2026 HowCanUDoThatToMe` 및 MIT 전문을 유지합니다. 배포 ZIP에도 `engine/licenses/FGOAC-KO-Installer-MIT.txt`와 적용 범위를 동봉합니다. 게임·번역·이미지·차분 자료, 생성된 게임 스크립트 전체나 아래 외부 구성품을 이 MIT로 재허락하지 않습니다.
+**자체 설치기 코드** — [적용 목록에 명시한 소스 파일](../installer/LICENSE_SCOPE.md)에 [MIT License](../installer/LICENSE)를 적용합니다. `Copyright (c) 2026 HowCanUDoThatToMe` 및 MIT 전문을 유지합니다. 배포 ZIP에도 `engine/licenses/FGOAC-KO-Installer-MIT.txt`와 적용 범위를 동봉합니다. 게임·번역·이미지·차분 자료, 생성된 게임 스크립트 전체나 아래 외부 구성품을 이 MIT로 재허락하지 않습니다.
 
 **[PhotoCraft](https://github.com/storytold/photocraft)** — 이미지 편집·크기 조정·투명도 확인·저장 및 PNG 내보내기에 사용한 오픈소스 도구입니다. 작업 기록에서 v0.15.1 사용을 확인했습니다. ArtCraft Team 및 PhotoCraft contributors의 프로젝트이며, 해당 버전은 [MIT](https://github.com/storytold/photocraft/blob/v0.15.1/LICENSE-MIT) 또는 [Apache-2.0](https://github.com/storytold/photocraft/blob/v0.15.1/LICENSE-APACHE) 라이선스를 선택할 수 있습니다. 여기서는 제작 도구 사용 사실을 밝히며 PhotoCraft 프로그램 자체를 패치에 동봉하지 않습니다.
 
 **Cloud23333** — 로컬 플랫폼과 현지화 도구 관련 선행 작업. 무료 배포나 크레딧 표기를 재배포 허락으로 해석하지 않습니다. 플랫폼·현지화 도구 전체는 이 패치의 배포 대상으로 승인되지 않았습니다.
 
 **FGOAC scooby contributors** — 프로젝트의 FARC 구현은 `Hanhua/Archive.cs`에서 파생되었다는 출처 기록이 있습니다. 명시적 MIT 적용 코드가 포함되는 경우 `Copyright (c) 2026 FGOAC scooby contributors`와 MIT 전문을 보존합니다. [상위 프로젝트](https://github.com/githubuser420x/FGOAC-scooby) · [라이선스](https://github.com/githubuser420x/FGOAC-scooby/blob/master/LICENSE). 이전 권리자 코드와 게임 자료의 권리는 별도입니다.
+
+**마이룸 자막 글꼴** — Three Colors v2.1.0은 나눔고딕 굵게(`NanumGothic-Bold.ttf`)를 사용합니다. 글꼴 저작권은 NHN Corporation(2010)에 있으며, 함께 설치되는 [OFL.txt](../licenses/NanumGothic-OFL.txt)에 SIL Open Font License 1.1 전문과 보존할 글꼴 이름이 적혀 있습니다.
 
 **Noto 기반 글꼴** — `FGOAC Korean Test`는 Noto CJK 한국어 글꼴에 기반한 파생 글꼴이며, Noto Sans·Symbols·Math 계열의 보완 및 고지 기록이 있습니다. 실제 사용 글리프와 각 출처의 고지를 보존합니다. 아래는 읽은 글꼴·OFL 자료의 권리 표기입니다.
 

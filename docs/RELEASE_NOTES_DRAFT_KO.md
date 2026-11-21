@@ -1,4 +1,4 @@
-> **아래는 이전 r002의 안내 초안입니다.** 현재 r004의 설치·실행 방법과 라이선스는 [최신 릴리스 안내](RELEASE_NOTES_R004_KO.md)와 [README](../README.md)를 확인하세요.
+> **v1.0.0 r002 배포 당시의 초안입니다.** 현재 버전은 [최신 정식 릴리스](https://github.com/HowCanUDoThatToMe/FGOAC-KO/releases/latest)와 [README 설치 안내](../README.md#받기와-설치)를 확인하세요. 후속 r004의 기록은 [r004 릴리스 안내](RELEASE_NOTES_R004_KO.md)에 있습니다.
 
 # FGO Arcade 한국어 패치 v1.0.0 — 오프라인 배포 안내
 
@@ -28,7 +28,7 @@ FGO Arcade의 텍스트와 이미지 속 글자를 한국어로 옮긴 팬 패�
 
 지원 기준은 Windows 64비트, 제작 시 확인한 Cloud23333 업데이트 1.10 적용 환경(내부 게임 버전 11.51)입니다. 영문 런처 자료가 포함된 기준 환경이므로 같은 버전의 모든 배포본을 보증하지 않으며 원본 파일 검사 결과가 맞아야 합니다.
 
-1. [v1.0.0 릴리스](https://github.com/HowCanUDoThatToMe/FGOAC-KO/releases/tag/v1.0.0)에서 1of2·2of2 ZIP을 모두 받습니다.
+1. r002 당시 설치 자료는 1of2·2of2 ZIP 두 개로 구성됐습니다. 공개된 후속 배포본은 [v1.0.0-r004 릴리스](https://github.com/HowCanUDoThatToMe/FGOAC-KO/releases/tag/v1.0.0-r004)에서 받을 수 있습니다.
 2. 두 ZIP을 같은 위치에 풀어 하나의 `FGOAC-Korean-Offline-v1.0.0` 폴더로 모읍니다.
 3. 게임과 서버를 종료하고 `Start-KoreanPatch.cmd`를 실행합니다.
 4. **자료 검사** 후 `App`과 `Server`가 함께 있는 게임 폴더를 선택해 **설치 / 업데이트**를 누릅니다.

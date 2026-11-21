@@ -13,6 +13,7 @@
 | SQLite 3.40.1 | `runtime/DLLs/sqlite3.dll`, `_sqlite3.pyd` | SQLite는 public domain: https://sqlite.org/copyright.html |
 | Microsoft VC 런타임 | `runtime/vcruntime140.dll`, `vcruntime140_1.dll` 및 Python 바이너리의 링크 코드 | Python LICENSE의 `Additional Conditions for this Windows binary build` |
 | Noto 파생 글꼴 | 설치된 한국어 리소스 | `NOTO-OFL.txt` |
+| 나눔고딕 굵게 · Three Colors 마이룸 자막 | 한국어 리소스의 `native/myroom-trial/NanumGothic-Bold.ttf` | 같은 폴더의 [OFL.txt](../licenses/NanumGothic-OFL.txt) (SIL OFL 1.1) |
 | 선행 Scooby MIT 적용 코드 | 해당 코드 부분 | `FGOAC-scooby-MIT.txt` |
 | 한국어 표시 DLL의 Zig·MinGW 런타임 | 설치된 `native/fgoko-labels.dll` | `NATIVE_LABEL_NOTICE.txt`, `Zig-MIT.txt`, `MinGW-w64-COPYING.txt` |
 

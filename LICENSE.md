@@ -2,7 +2,7 @@
 
 이 저장소에는 서로 다른 권리가 적용되는 자료가 함께 있습니다.
 
-- **자체 설치기 코드:** [명시한 9개 소스 파일](installer/LICENSE_SCOPE.md)에 [MIT License](installer/LICENSE)를 적용합니다.
+- **자체 설치기 코드:** [적용 목록에 명시한 소스 파일](installer/LICENSE_SCOPE.md)에 [MIT License](installer/LICENSE)를 적용합니다.
 - **게임·번역·이미지·차분 자료:** 위 MIT의 적용 대상이 아닙니다. 원작의 권리는 각 권리자에게 있으며, 프로젝트가 원작 콘텐츠에 새 이용허락을 부여하지 않습니다.
 - **외부 코드·글꼴·실행 환경:** [제3자 고지](docs/THIRD_PARTY_NOTICES_KO.md)와 [구성품별 라이선스 전문](licenses/)을 따릅니다.
 

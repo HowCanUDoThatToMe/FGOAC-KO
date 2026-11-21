@@ -309,10 +309,11 @@ Fate/Grand Order Arcade 및 관련 명칭·캐릭터·음악·이미지·원문�
 - Cloud23333: 로컬 플랫폼·현지화 도구 관련 선행 작업. 언급은 재배포 허락이나 공식 제휴를 뜻하지 않습니다.
 - [FGOAC scooby 기여자](https://github.com/githubuser420x/FGOAC-scooby): FARC 형식 구현 등 참고·파생 도구 코드. 해당 코드의 MIT 고지는 별도로 유지합니다.
 - Noto·Adobe·Google 및 해당 글꼴 기여자: Noto 기반 한글 글꼴과 보완 글리프. SIL OFL 1.1 적용.
+- NHN Corporation · Three Colors 마이룸 자막에 사용한 나눔고딕 굵게 글꼴(SIL OFL 1.1).
 - Python Software Foundation, Tcl/Tk, Zig, MinGW-w64 및 실제 포함 구성요소의 기여자.
 
-최종 동봉 고지 목록은 [제3자 고지 초안](docs/THIRD_PARTY_NOTICES_KO.md), 권리 확인 상태는 [내부 검토표](docs/PREPUBLICATION_CHECKLIST_KO.md)를 참조합니다. 확인표는 공개 허락이나 법률 의견서가 아닙니다.
+구성품별 저작권과 고지는 [제3자 고지](docs/THIRD_PARTY_NOTICES_KO.md)를 확인하세요. [r002 배포 준비 당시의 검토표](docs/PREPUBLICATION_CHECKLIST_KO.md)는 그 시점의 기록입니다.
 
 
-[v2.1.0 릴리스 안내](https://github.com/HowCanUDoThatToMe/FGOAC-KO/releases/tag/v2.1.0) · [이전 v2.0.0 릴리스](https://github.com/HowCanUDoThatToMe/FGOAC-KO/releases/tag/v2.0.0) · [이전 v1.0.3 릴리스](https://github.com/HowCanUDoThatToMe/FGOAC-KO/releases/tag/v1.0.3) · [제보 안내](docs/REPORTING_KO.md)
+[배포본별 문서 안내](docs/README.md) · [v2.1.0 릴리스 안내](https://github.com/HowCanUDoThatToMe/FGOAC-KO/releases/tag/v2.1.0) · [이전 v2.0.0 릴리스](https://github.com/HowCanUDoThatToMe/FGOAC-KO/releases/tag/v2.0.0) · [이전 v1.0.3 릴리스](https://github.com/HowCanUDoThatToMe/FGOAC-KO/releases/tag/v1.0.3) · [제보 안내](docs/REPORTING_KO.md)
 

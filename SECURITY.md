@@ -14,7 +14,15 @@
 
 ## 릴리스와 검사 기록
 
-작성 시점의 최신 릴리스는 [v1.0.1](https://github.com/HowCanUDoThatToMe/FGOAC-KO/releases/tag/v1.0.1)입니다. 이후 변경 사항은 [릴리스 목록](https://github.com/HowCanUDoThatToMe/FGOAC-KO/releases)과 [README](README.md)를 확인해 주세요. 이 안내는 특정 버전의 지속적인 보안 지원을 약속하지 않습니다.
+최신 정식판은 [GitHub Releases](https://github.com/HowCanUDoThatToMe/FGOAC-KO/releases/latest)에서 확인할 수 있습니다. 검사 기록을 비교할 때는 사용 중인 패치 버전과 파일의 SHA-256을 먼저 확인해 주세요.
+
+### v2.1.0
+
+2026년 11월 21일 공개 ZIP에 포함된 자막 EXE·DLL과 Python 스크립트 6개를 개별 검사했습니다. **8개 모두 VirusTotal 악성·의심 판정이 0건**이었습니다. 일부 엔진은 파일 형식을 지원하지 않거나 검사에 실패했습니다. [파일별 수치와 보고서](README.md#v210-virustotal-검사-결과) · [설치 ZIP 두 개의 SHA-256](https://github.com/HowCanUDoThatToMe/FGOAC-KO/releases/download/v2.1.0/SHA256SUMS.txt)
+
+이 결과는 해당 파일 8개의 검사 시점에만 적용됩니다. ZIP 전체에 대한 새 Defender 검사 결과는 확인되지 않았습니다. ZIP 안의 `engine/licenses/SECURITY_SCOPE_KO.md`는 v2.0.0 당시의 기록입니다.
+
+### v1.0.1 기록
 
 - [v1.0.1 검사 기록](docs/SECURITY_CHECK_v1.0.1_20261026.json): 2026-10-26 02:06 KST에 전체 후보 폴더를 대상으로 한 Defender 사용자 지정 검사에서 위협 없음·종료 코드 0이 기록됐습니다. PC 전체 검사나 부팅 시 오프라인 검사는 아닙니다. 대상 파일·배포 ZIP의 해시와 범위는 해당 기록 및 [SHA-256 목록](docs/SHA256SUMS_v1.0.1.txt)을 확인해 주세요.
 - 변경된 `engine.py`와 `platform_launch.py`의 [v1.0.1 VirusTotal 후속 결과](docs/VIRUSTOTAL_v1.0.1_20261026.json)를 별도로 확인했습니다. 두 보고서 모두 화면 표시 **0/60**이며 악성·의심 판정은 0개입니다. 실제 배포된 작은 업데이트 ZIP의 해당 파일과 보고서의 SHA-256·바이트 수가 일치합니다. `engine.py`는 확정 시간 초과 1개·미지원 13개·실패 1개, `platform_launch.py`는 시간 초과 1개·확정 시간 초과 1개·미지원 12개·실패 1개가 있어 미탐지 60개와 구분합니다. 출시 당시 기록은 보존하며, **[v1.0.0-r004의 VirusTotal 결과](docs/VIRUSTOTAL_R004_20261026.json)를 v1.0.1의 변경 파일에 적용하지 않습니다.**
